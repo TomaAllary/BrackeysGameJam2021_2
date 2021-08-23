@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Branch
   - Rock
+  - Wood
   layers:
   - Default
   - TransparentFX
