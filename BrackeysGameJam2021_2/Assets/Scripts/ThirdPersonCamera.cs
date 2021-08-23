@@ -12,7 +12,7 @@ public class ThirdPersonCamera : MonoBehaviour
     /// The offset between cam and target stay the same as in the editor
     /// </summary>
     [SerializeField] Transform playerTarget;
-    [SerializeField] float rotateCamSpeed = 50.0f;
+    [SerializeField] float rotateCamSpeed = 100.0f;
 
 
     // Start is called before the first frame update
