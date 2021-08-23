@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
         player = GameObject.Find("Player");
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
 
         var cameraForward = mainCamera.transform.forward;

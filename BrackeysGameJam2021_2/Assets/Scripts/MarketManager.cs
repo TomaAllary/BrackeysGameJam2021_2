@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class MarketManager : MonoBehaviour
 {
+    [SerializeField] private GameObject marketScrollView;
     //singleton
     private static MarketManager instance;
     public static MarketManager Instance { get { return instance; } }
 
-    private int[] ressources = new int[4];
-    private Dictionary<string, int> itemsCost = new Dictionary<string, int>();
+    private List<BuyableItem> marketItems = new List<BuyableItem>();
+    private Dictionary<int, int> ressources = new Dictionary<int, int>() {
+        { Constants.Wood, 0 },
+        { Constants.Rock, 0 },
+        { Constants.LapisLazulis, 0 },
+        { Constants.Horn, 0 }
+    };
+
 
     private void Awake() {
         if (instance != null && instance != this) {
@@ -20,10 +27,21 @@ public class MarketManager : MonoBehaviour
         }
     }
 
-    public void AddRessource(int resType) {
-        ressources[resType]++;
+    public void AddBuyable(BuyableItem toAdd) {
+        marketItems.Add(toAdd);
+
+
     }
 
-    //public void BuyWoodWall()
+    public void Buy(string buyableItemName) {
+
+        foreach(BuyableItem buyable in marketItems) {
+            if(buyable.MarketName == buyableItemName) {
+                if(ressources[buyable.RessourceTypeNumber] >= buyable.Cost) {
+                    ressources[buyable.RessourceTypeNumber] -= buyable.Cost;
+                }
+            }
+        }
+    }
 
 }

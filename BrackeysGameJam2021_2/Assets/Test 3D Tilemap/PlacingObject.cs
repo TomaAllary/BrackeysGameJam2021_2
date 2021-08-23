@@ -36,7 +36,7 @@ public class PlacingObject : MonoBehaviour
     }
 
 
-    private void FixedUpdate() {
+    private void Update() {
 
         if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0)) {
             Camera cam = Camera.main;
