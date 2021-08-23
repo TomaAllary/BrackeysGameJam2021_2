@@ -11,10 +11,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject craftingPanel;
     public Vector3 cameraPosition;
     public float speed = 8.00f;
-    public Dictionary<string, int> inventory = new Dictionary<string, int>();
     public Camera mainCamera;
-    public TMP_Text woodText;
-    public TMP_Text rockText;
+
     private GameObject player;
 
     private Vector3 direction;
@@ -56,22 +54,8 @@ public class PlayerMovement : MonoBehaviour
         if(collider.gameObject.layer == LayerMask.NameToLayer("Loot"))
         {
             Destroy(collider.gameObject);
-            if (inventory.ContainsKey(collider.gameObject.tag))
-            {
-                int currentLevel = inventory[collider.gameObject.tag];
-                inventory[collider.gameObject.tag] = currentLevel + 1;
-                int token = 1;
-            }
-            else
-            {
-                inventory.Add(collider.gameObject.tag, 1);
-                int Token = 1; 
-            }
-            int value;
-            inventory.TryGetValue("Branch", out value);
-            woodText.text = "Wood: " + value;
-            inventory.TryGetValue("Rock", out value);
-            rockText.text = "Rock: " + value;
+
+            MarketManager.Instance.AddRessource(collider.gameObject.tag);
         }
     }
 }
