@@ -18,10 +18,13 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 direction;
     private float horizontalInput;
     private float verticalInput;
+
+    private Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -38,8 +41,9 @@ public class PlayerMovement : MonoBehaviour
         {
             direction = horizontalInput * cameraRight + verticalInput * cameraForward;
             transform.LookAt(transform.position + direction + cameraPosition);
-            transform.position = (transform.position + direction * Time.fixedDeltaTime * speed);
+            //transform.position = (transform.position + direction * Time.fixedDeltaTime * speed);
 
+            rb.MovePosition(transform.position + direction * Time.fixedDeltaTime * speed);
 
         }
 
