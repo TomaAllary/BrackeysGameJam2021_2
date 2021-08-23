@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         var cameraForward = mainCamera.transform.forward;
         var cameraRight = mainCamera.transform.right;
         cameraForward.y = 0f;
@@ -47,7 +48,6 @@ public class PlayerMovement : MonoBehaviour
             transform.position = (transform.position + direction * Time.fixedDeltaTime * speed);
 
 
-            mainCamera.transform.position += direction * Time.fixedDeltaTime * speed;
         }
     }
 
