@@ -8,6 +8,9 @@ public class BuyableItem : MonoBehaviour
 {
     [SerializeField] private TMP_Text label;
 
+    public GameObject itemPreview;
+    public GameObject itemModel;
+
     public string ressourceType;
     public int cost;
     public string marketName;

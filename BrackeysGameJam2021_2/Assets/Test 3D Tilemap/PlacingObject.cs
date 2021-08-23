@@ -6,13 +6,16 @@ using UnityEngine.Tilemaps;
 
 public class PlacingObject : MonoBehaviour
 {
-    [SerializeField] private GameObject wallPrefab;
+    private GameObject objToPlace;
+    private GameObject objPreview;
 
     [SerializeField] private Tilemap tileMap;
     [SerializeField] private List<Vector3> availablePlaces;
 
     void Start() {
         FindLocationsOfTiles();
+        if (objPreview != null)
+            objPreview = Instantiate(objPreview);
     }
 
     private void FindLocationsOfTiles() {
@@ -38,7 +41,7 @@ public class PlacingObject : MonoBehaviour
 
     private void Update() {
 
-        if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0)) {
+        if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0) && objToPlace != null) {
             Camera cam = Camera.main;
 
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -55,7 +58,47 @@ public class PlacingObject : MonoBehaviour
             }
 
         }
+
+        if(objPreview != null) {
+            Camera cam = Camera.main;
+
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
+
+                Vector3 destination = new Vector3(hit.point.x, tileMap.transform.position.y, hit.point.z);
+
+                Vector3Int gridPos = tileMap.WorldToCell(destination);
+                if (availablePlaces.Contains(gridPos))
+                    objPreview.GetComponentInChildren<Renderer>().material.SetColor("error placing", new Color32(255, 0, 0, 40));
+                else
+                    objPreview.GetComponentInChildren<Renderer>().material.SetColor("error placing", new Color32(176, 176, 176, 40));
+
+
+                objPreview.transform.position = tileMap.CellToWorld(gridPos);
+
+            }
+        }
     }
+
+    public void SetObjectToPlace(GameObject toPlace, GameObject preview) {
+        if (objPreview != null)
+            Destroy(objPreview.gameObject);
+
+        objPreview = Instantiate(preview);
+
+        objToPlace = toPlace;
+    }
+
+    public void ClearObjectToPlace() {
+        if (objPreview != null)
+            Destroy(objPreview.gameObject);
+        objPreview = null;
+        objToPlace = null;
+    }
+
+
 
     private void SpawnWall(Vector3Int pos) {
 
@@ -64,7 +107,7 @@ public class PlacingObject : MonoBehaviour
 
         Vector3 realPos = tileMap.CellToWorld(pos);
 
-        Instantiate(wallPrefab, realPos, Quaternion.identity);
+        Instantiate(objToPlace, realPos, Quaternion.identity);
 
 
         availablePlaces.Add(pos);
