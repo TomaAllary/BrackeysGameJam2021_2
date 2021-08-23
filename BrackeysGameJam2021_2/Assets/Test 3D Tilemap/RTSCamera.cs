@@ -24,6 +24,11 @@ public class RTSCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    private void FixedUpdate()
+    {
         float sideSpeed = Input.GetAxis("Horizontal") * camSpeed * Time.deltaTime;
         cam.transform.position += cam.transform.right * sideSpeed;
 
@@ -33,7 +38,8 @@ public class RTSCamera : MonoBehaviour
         cam.transform.position += frontVector * frontSpeed;
 
 
-        if (Input.GetKey(KeyCode.LeftAlt)) {
+        if (Input.GetKey(KeyCode.LeftAlt))
+        {
 
             Cursor.lockState = CursorLockMode.Locked;
 
@@ -42,7 +48,8 @@ public class RTSCamera : MonoBehaviour
 
             cam.transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
         }
-        else {
+        else
+        {
             Cursor.lockState = CursorLockMode.None;
 
         }
