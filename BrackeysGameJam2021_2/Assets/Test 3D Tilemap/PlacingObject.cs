@@ -63,5 +63,9 @@ public class PlacingObject : MonoBehaviour
         Vector3 realPos = tileMap.CellToWorld(pos);
 
         Instantiate(wallPrefab, realPos, Quaternion.identity);
+
+
+        availablePlaces.Add(pos);
+
     }
 }
