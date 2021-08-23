@@ -45,6 +45,9 @@ public class PlayerMovement : MonoBehaviour
             direction = horizontalInput * cameraRight + verticalInput * cameraForward;
             transform.LookAt(transform.position + direction + cameraPosition);
             transform.position = (transform.position + direction * Time.fixedDeltaTime * speed);
+
+
+            mainCamera.transform.position += direction * Time.fixedDeltaTime * speed;
         }
     }
 
