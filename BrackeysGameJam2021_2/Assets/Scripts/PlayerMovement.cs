@@ -4,31 +4,26 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float horizontalInput;
-    public float verticalInput;
+    [SerializeField] private GameObject craftingPanel;
     public Vector3 cameraPosition;
     public float speed = 8.00f;
     public Dictionary<string, int> inventory = new Dictionary<string, int>();
     public Camera mainCamera;
-    public Text woodText;
-    public Text rockText;
+    public TMP_Text woodText;
+    public TMP_Text rockText;
     private GameObject player;
 
     private Vector3 direction;
+    private float horizontalInput;
+    private float verticalInput;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-
     }
 
     private void FixedUpdate()
@@ -48,6 +43,11 @@ public class PlayerMovement : MonoBehaviour
             transform.position = (transform.position + direction * Time.fixedDeltaTime * speed);
 
 
+        }
+
+        //toggle craft menu on E
+        if (Input.GetKeyDown(KeyCode.E)) {
+            craftingPanel.SetActive(!craftingPanel.activeSelf);
         }
     }
 
@@ -69,9 +69,9 @@ public class PlayerMovement : MonoBehaviour
             }
             int value;
             inventory.TryGetValue("Branch", out value);
-            woodText.GetComponent<Text>().text = "Wood: " + value;
+            woodText.text = "Wood: " + value;
             inventory.TryGetValue("Rock", out value);
-            rockText.GetComponent<Text>().text = "Rock: " + value;
+            rockText.text = "Rock: " + value;
         }
     }
 }
