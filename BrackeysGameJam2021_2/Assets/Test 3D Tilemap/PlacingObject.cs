@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 
 public class PlacingObject : MonoBehaviour
@@ -35,8 +36,9 @@ public class PlacingObject : MonoBehaviour
     }
 
 
-    private void Update() {
-        if (Input.GetMouseButtonDown(0)) {
+    private void FixedUpdate() {
+
+        if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0)) {
             Camera cam = Camera.main;
 
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
