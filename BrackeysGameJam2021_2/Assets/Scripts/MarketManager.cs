@@ -165,10 +165,9 @@ public class MarketManager : MonoBehaviour
                 Vector3 destination = new Vector3(hit.point.x, tileMap.transform.position.y, hit.point.z);
 
                 Vector3Int gridPos = tileMap.WorldToCell(destination);
-                if (availablePlaces.Contains(gridPos))
-                    objPreview.GetComponentInChildren<Renderer>().material.SetColor("error placing", new Color32(255, 0, 0, 40));
-                else
-                    objPreview.GetComponentInChildren<Renderer>().material.SetColor("error placing", new Color32(176, 176, 176, 40));
+                
+                //if (availablePlaces.Contains(gridPos))
+                    //play sound maybe
 
 
                 objPreview.transform.position = tileMap.CellToWorld(gridPos);
