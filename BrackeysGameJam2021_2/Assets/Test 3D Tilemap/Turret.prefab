@@ -208,7 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 8551823175543773428, guid: 75fa9ba22af5e9e43882db0df955075f, type: 3}
   projectileStartPos: {fileID: 3883304696043196684}
-  attackRate: 2
+  attackRate: 1
   range: 30
 --- !u!1001 &6550100663974330459
 PrefabInstance:
