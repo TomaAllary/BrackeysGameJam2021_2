@@ -40,7 +40,7 @@ public class Goat : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-         if (other.gameObject.layer == LayerMask.NameToLayer("Weapon") && other.GetComponent<Weapon>().isAttacking)
+        if (other.gameObject.layer == LayerMask.NameToLayer("Weapon") && other.GetComponent<Weapon>().isAttacking)
         {
             currentHealth = currentHealth - other.GetComponent<Weapon>().attackDamage;
             healthBar.GetComponent<HealthBar>().setHealth(currentHealth);
@@ -50,4 +50,17 @@ public class Goat : MonoBehaviour
             }        
         }
     }
+
+    //public void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.layer == LayerMask.NameToLayer("Weapon") && collision.gameObject.GetComponent<Weapon>().isAttacking)
+    //    {
+    //        currentHealth = currentHealth - collision.gameObject.GetComponent<Weapon>().attackDamage;
+    //        healthBar.GetComponent<HealthBar>().setHealth(currentHealth);
+    //        if (currentHealth <= 0)
+    //        {
+    //            Destroy(this.gameObject);
+    //        }
+    //    }
+    //}
 }
