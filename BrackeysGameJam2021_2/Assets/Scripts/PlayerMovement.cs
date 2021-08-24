@@ -14,10 +14,13 @@ public class PlayerMovement : MonoBehaviour
     public Camera mainCamera;
 
     private GameObject player;
+    public GameObject Staff;
 
     private Vector3 direction;
     private float horizontalInput;
     private float verticalInput;
+    private bool canAttack;
+    private float attackCoolDown;
 
     private Rigidbody rb;
     // Start is called before the first frame update
@@ -25,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     {
         player = GameObject.Find("Player");
         rb = GetComponent<Rigidbody>();
+        canAttack = true;
+        attackCoolDown = 0f;
     }
 
     private void Update()
@@ -50,6 +55,23 @@ public class PlayerMovement : MonoBehaviour
         //toggle craft menu on E
         if (Input.GetKeyDown(KeyCode.E)) {
             craftingPanel.SetActive(!craftingPanel.activeSelf);
+        }
+
+        else if (Input.GetKey(KeyCode.Mouse0) && canAttack) {
+            attackCoolDown = 0.5f;
+            canAttack = false;
+            Staff.GetComponent<Staff>().isAttacking = true;          
+        }
+
+        if (!canAttack)
+        {
+            if (attackCoolDown > 0)
+                attackCoolDown -= Time.deltaTime;
+            else
+            {
+                attackCoolDown = 0;
+                canAttack = true;
+            }
         }
     }
 
