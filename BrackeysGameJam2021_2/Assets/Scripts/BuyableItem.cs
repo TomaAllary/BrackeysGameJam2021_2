@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class BuyableItem : MonoBehaviour
 {
-    [SerializeField] private TMP_Text label;
+    public TMP_Text label;
 
     public GameObject itemPreview;
     public GameObject itemModel;
@@ -17,8 +17,8 @@ public class BuyableItem : MonoBehaviour
 
     private void Start() {
 
-
-        label.text = marketName + ": " + cost + " " + ressourceType;
+        if(label != null)
+            label.text = marketName + ": " + cost + " " + ressourceType;
     }
 
 

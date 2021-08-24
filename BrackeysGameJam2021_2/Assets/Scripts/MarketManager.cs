@@ -70,9 +70,9 @@ public class MarketManager : MonoBehaviour
 
     }
 
-    public void AddRessource(string type) {
+    public void AddRessource(string type, int amount = 1) {
         if (ressources.ContainsKey(type)) {
-            ressources[type]++;
+            ressources[type] += amount;
 
             ressourceCounters[GetRessourceTypeNumber(type)].text = type + ": " + ressources[type];
         }
@@ -138,39 +138,54 @@ public class MarketManager : MonoBehaviour
 
         if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0) && objToPlace != null) {
             Camera cam = Camera.main;
-
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
 
                 Vector3 destination = new Vector3(hit.point.x, tileMap.transform.position.y, hit.point.z);
-
                 Vector3Int gridPos = tileMap.WorldToCell(destination);
-
                 SpawnObj(gridPos);
-
             }
 
         }
 
         if (objPreview != null) {
             Camera cam = Camera.main;
-
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
 
                 Vector3 destination = new Vector3(hit.point.x, tileMap.transform.position.y, hit.point.z);
-
                 Vector3Int gridPos = tileMap.WorldToCell(destination);
-                
                 //if (availablePlaces.Contains(gridPos))
                     //play sound maybe
 
-
                 objPreview.transform.position = tileMap.CellToWorld(gridPos);
+            }
+        }
+
+        if (!EventSystem.current.IsPointerOverGameObject() && Input.GetKey(KeyCode.X)) {
+            Camera cam = Camera.main;
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Construction"))) {
+
+                BuyableItem itemDestroyed = hit.collider.gameObject.GetComponent<BuyableItem>();
+                if (itemDestroyed != null) {
+                    //refund the cost
+                    AddRessource(itemDestroyed.ressourceType, itemDestroyed.cost);
+
+                    //Remove object form unavaible place
+                    Vector3 worldPosOnGrid = new Vector3(hit.collider.gameObject.transform.position.x, tileMap.transform.position.y, hit.collider.gameObject.transform.position.z);
+                    Vector3Int gridPos = tileMap.WorldToCell(worldPosOnGrid);
+                    availablePlaces.Remove(gridPos);
+
+                    //Destroy object
+                    Destroy(hit.collider.gameObject);
+                }
 
             }
         }
