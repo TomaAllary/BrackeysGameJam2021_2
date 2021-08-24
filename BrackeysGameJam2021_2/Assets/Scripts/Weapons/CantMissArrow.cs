@@ -16,13 +16,17 @@ public class CantMissArrow : Projectile
     void Update()
     {
         if(target != null) {
-            transform.LookAt(target.position);
+            //transform.LookAt(target.position, target.up);
+            transform.rotation = Quaternion.LookRotation(transform.position - target.position);
             transform.position -= speed * Time.deltaTime * (transform.position - target.position).normalized;
+        }
+        else {
+            Destroy(gameObject);
         }
     }
 
     private void OnTriggerEnter(Collider other) {
-        if(other.gameObject.layer == LayerMask.GetMask("Goat")) {
+        if(other.gameObject.layer == LayerMask.NameToLayer("Goat")) {
             Destroy(gameObject);
         }
     }

@@ -15,34 +15,35 @@ public class Turret : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cooldown = attackRate;
+        cooldown = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(cooldown > 0) {
-            cooldown -= Time.deltaTime;
-        }
-        else {
-            //Fire!
-
-            //try to kill actual target if always in range
-            if (target != null && target.currentHealth > 0 && ((target.gameObject.transform.position - projectileStartPos.position).magnitude < range)) {
+        //try to kill actual target if always in range
+        if (target != null && target.currentHealth > 0 && ((target.gameObject.transform.position - projectileStartPos.position).magnitude < range)) {
+            if (cooldown < 0) {
                 Projectile ammo = Instantiate(projectile);
                 ammo.transform.position = projectileStartPos.position;
                 ammo.target = target.transform;
+
+                //reset cooldown
+                cooldown = attackRate;
             }
-            //Change target
             else {
-                Collider[] hitColliders = Physics.OverlapSphere(projectileStartPos.position, range, LayerMask.GetMask("Goat"));
-
-                if (hitColliders.Length > 0)
-                    target = hitColliders[0].gameObject.GetComponent<Goat>();
+                cooldown -= Time.deltaTime;
             }
-
-            //reset cooldown
-            cooldown = attackRate;
         }
+        //Change target
+        else {
+            Collider[] hitColliders = Physics.OverlapSphere(projectileStartPos.position, range, LayerMask.GetMask("Goat"));
+
+            if (hitColliders.Length > 0)
+                target = hitColliders[0].gameObject.GetComponent<Goat>();
+        }
+
+
+        
     }
 }
