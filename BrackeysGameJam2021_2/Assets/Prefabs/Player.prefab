@@ -232,7 +232,6 @@ GameObject:
   - component: {fileID: 8325154320230039267}
   - component: {fileID: 2985396613917942815}
   - component: {fileID: 2985396613917942812}
-  - component: {fileID: 2985396613917942814}
   - component: {fileID: 8325154320230039277}
   m_Layer: 0
   m_Name: Player
@@ -291,20 +290,6 @@ MonoBehaviour:
   speed: 8
   mainCamera: {fileID: 0}
   Staff: {fileID: 6142193991947675204}
---- !u!114 &2985396613917942814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8325154320230039266}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86596dbe7419bf74a8ce99bb6b43c4d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tileMap: {fileID: 0}
-  availablePlaces: []
 --- !u!65 &8325154320230039277
 BoxCollider:
   m_ObjectHideFlags: 0

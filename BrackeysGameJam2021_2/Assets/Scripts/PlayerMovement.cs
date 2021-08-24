@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     private GameObject player;
     public GameObject Staff;
+    public GameObject fireball;
 
     private Vector3 direction;
     private float horizontalInput;
@@ -63,6 +64,10 @@ public class PlayerMovement : MonoBehaviour
             Staff.GetComponent<Staff>().isAttacking = true;          
         }
 
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(fireball, (transform.position + (transform.forward * 5)), transform.rotation);
+        }
         if (!canAttack)
         {
             if (attackCoolDown > 0)
