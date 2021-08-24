@@ -13,7 +13,8 @@ public class Goat : MonoBehaviour
     void Start()
     {
         healthBar.GetComponent<HealthBar>().setMaxHealth(Constants.NORMAL_GOAT_HEALTH);
-        currentHealth = Constants.NORMAL_GOAT_HEALTH;      
+        currentHealth = Constants.NORMAL_GOAT_HEALTH;   
+        goal = GameObject.Find("Player").transform;
     }
     private void Awake()
     {
