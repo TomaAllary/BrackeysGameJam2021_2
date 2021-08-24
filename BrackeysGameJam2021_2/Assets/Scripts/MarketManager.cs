@@ -26,12 +26,12 @@ public class MarketManager : MonoBehaviour
     //singleton
     private static MarketManager instance;
     public static MarketManager Instance { get { return instance; } }
-
+    //TODO: put these to 0, 99 is for testing only
     private Dictionary<string, int> ressources = new Dictionary<string, int>() {
-        { "Wood", 0 },
-        { "Rock", 0 },
-        { "LapisLazulis", 0 },
-        { "Horn", 0 }
+        { "Wood", 99 },
+        { "Rock", 99 },
+        { "LapisLazulis", 99 },
+        { "Horn", 99 }
     };
 
 
