@@ -17,7 +17,7 @@ public class Goat : MonoBehaviour
     }
     private void Awake()
     {
-        agent = this.gameObject.GetComponent<NavMeshAgent>();
+        agent = this.gameObject.GetComponentInChildren<NavMeshAgent>();
         agent.destination = goal.position;
     }
 
