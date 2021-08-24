@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3739633275569465151}
   - component: {fileID: 3739633275569465150}
   - component: {fileID: 141286311232003567}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 3739633275737842434}
   - component: {fileID: 3739633275737842433}
   - component: {fileID: 3739633275737842432}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 3739633276473295646}
   - component: {fileID: 3739633276473295645}
   - component: {fileID: 3739633276473295644}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 3739633276646796609}
   - component: {fileID: 3739633276646796608}
   - component: {fileID: 3739633276646796639}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -423,7 +423,7 @@ GameObject:
   - component: {fileID: 3739633276999765126}
   - component: {fileID: 3739633276999765125}
   - component: {fileID: 3739633276999765124}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -518,7 +518,7 @@ GameObject:
   - component: {fileID: 3739633277012226814}
   - component: {fileID: 3739633277012226813}
   - component: {fileID: 3739633277012226815}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Goat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,7 +583,7 @@ GameObject:
   - component: {fileID: 3739633277357899299}
   - component: {fileID: 3739633277357899298}
   - component: {fileID: 3739633277357899297}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
