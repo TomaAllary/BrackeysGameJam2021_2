@@ -10,6 +10,8 @@ public class Constructable : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        healthBar = gameObject.GetComponentInChildren<HealthBar>();
+        billboard = gameObject.GetComponentInChildren<Billboard>();
         healthBar.setMaxHealth(currentHealth);
     }
 

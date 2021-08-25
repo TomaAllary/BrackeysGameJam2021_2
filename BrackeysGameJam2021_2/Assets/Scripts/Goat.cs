@@ -23,10 +23,11 @@ public class Goat : Weapon
 
         healthBar.GetComponent<HealthBar>().setMaxHealth(Constants.NORMAL_GOAT_HEALTH);
         currentHealth = Constants.NORMAL_GOAT_HEALTH;   
-        goal = GameObject.Find("Player").transform;
+        
     }
     private void Awake()
     {
+        goal = GameObject.Find("Player").transform;
         agent = this.gameObject.GetComponentInChildren<NavMeshAgent>();
         agent.destination = goal.position;
     }

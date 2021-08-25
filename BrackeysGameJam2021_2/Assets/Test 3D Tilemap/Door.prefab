@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: -5321148087240203144}
   - component: {fileID: 4999255566158316740}
   - component: {fileID: 5631090981937870339}
+  - component: {fileID: 32611901287935073}
   m_Layer: 10
   m_Name: Door
   m_TagString: Untagged
@@ -175,7 +176,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.9990847, z: 1}
+  m_Size: {x: 1.1, y: 1.9990847, z: 1.1}
   m_Center: {x: 0.02030979, y: 0.9990741, z: 0.008023399}
 --- !u!208 &5631090981937870339
 NavMeshObstacle:
@@ -187,9 +188,24 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.00001, z: 0.5}
+  m_Extents: {x: 0.4, y: 0.00001, z: 0.4}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 1, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &32611901287935073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6550100664853535473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dba78cedceb9bc84c95d6fa69979ecbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  billboard: {fileID: 0}
+  currentHealth: 0
