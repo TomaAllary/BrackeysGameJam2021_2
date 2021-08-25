@@ -15,6 +15,7 @@ public class MarketManager : MonoBehaviour
 
     [SerializeField] private Tilemap tileMap;
     [SerializeField] private List<Vector3> availablePlaces;
+    [SerializeField] private GameObject BuyResPanel;
 
     //MARKET STUFF
     [SerializeField] private List<BuyableItem> marketItems;
@@ -56,12 +57,18 @@ public class MarketManager : MonoBehaviour
         }
     }
 
+    //format: ressourceType:amount **amount is 1 if no string after :**
     public void SellRessource(string ressourceType) {
+        string[] split = ressourceType.Split(':');
+        ressourceType = split[0];
+        int amount = 1;
+        if (split.Length > 1)
+            amount = int.Parse(split[1]);
 
         //Sell ressource for LL **could have a multiplicator**
-        if (ressources[ressourceType] > 0) {
-            ressources[ressourceType]--;
-            ressources["LapisLazulis"]++;
+        if (ressources[ressourceType] - amount >= 0) {
+            ressources[ressourceType] -= amount;
+            ressources["LapisLazulis"] += amount;
 
             ressourceCounters[GetRessourceTypeNumber(ressourceType)].text = ressourceType + ": " + ressources[ressourceType];
             ressourceCounters[Constants.LapisLazulis].text = "LL: " + ressources["LapisLazulis"];
@@ -70,12 +77,54 @@ public class MarketManager : MonoBehaviour
 
     }
 
-    public void AddRessource(string type, int amount = 1) {
+    //format: ressourceType:amount **amount is 1 if no string after :**
+    public bool SellRessourceWithoutRefund(string ressourceType) {
+        string[] split = ressourceType.Split(':');
+        ressourceType = split[0];
+        int amount = 1;
+        if (split.Length > 1)
+            amount = int.Parse(split[1]);
+
+        if (ressources[ressourceType] - amount >= 0) {
+            ressources[ressourceType] -= amount;
+            if (ressourceType != "LapisLazulis")
+                ressourceCounters[GetRessourceTypeNumber(ressourceType)].text = ressourceType + ": " + ressources[ressourceType];
+            else
+                ressourceCounters[GetRessourceTypeNumber(ressourceType)].text = "LL: " + ressources[ressourceType];
+            return true;
+        }
+
+        return false;
+    }
+
+    //format: ressourceType:amount **amount is 1 if no string after :**
+    public void AddRessource(string type) {
+        string[] split = type.Split(':');
+        type = split[0];
+        int amount = 1;
+        if (split.Length > 1)
+            amount = int.Parse(split[1]);
+
         if (ressources.ContainsKey(type)) {
             ressources[type] += amount;
-
-            ressourceCounters[GetRessourceTypeNumber(type)].text = type + ": " + ressources[type];
+            if(type != "LapisLazulis")
+                ressourceCounters[GetRessourceTypeNumber(type)].text = type + ": " + ressources[type];
+            else
+                ressourceCounters[GetRessourceTypeNumber(type)].text = "LL: " + ressources[type];
         }
+    }
+
+    //format: ressourceBoughtWith:amount,ressourceBought:amount **amount is 1 if no string after :**
+    public void BuyWithLL(string deal) {
+        string[] split = deal.Split(',');
+        if (split.Length != 2)
+            return;
+        string ressourceBoughtWith = split[0];
+        string ressourceBought = split[1];
+
+        if(SellRessourceWithoutRefund(ressourceBoughtWith))
+            AddRessource(ressourceBought);
+
     }
 
     public int GetRessourceTypeNumber(string ressourceName) {
@@ -96,6 +145,13 @@ public class MarketManager : MonoBehaviour
         return -1;
     }
 
+    public void OpenBuyResPanel() {
+        BuyResPanel.SetActive(true);
+    }
+    public void CloseBuyResPanel() {
+        BuyResPanel.SetActive(false);
+    }
+
 
 
     //--------------------------------------------------------------------------------------------//
@@ -111,6 +167,8 @@ public class MarketManager : MonoBehaviour
         FindLocationsOfTiles();
         if (objPreview != null)
             objPreview = Instantiate(objPreview);
+
+        BuyResPanel.SetActive(false);
     }
 
     private void FindLocationsOfTiles() {
@@ -176,7 +234,7 @@ public class MarketManager : MonoBehaviour
                 BuyableItem itemDestroyed = hit.collider.gameObject.GetComponent<BuyableItem>();
                 if (itemDestroyed != null) {
                     //refund the cost
-                    AddRessource(itemDestroyed.ressourceType, itemDestroyed.cost);
+                    AddRessource(itemDestroyed.ressourceType + ":" + itemDestroyed.cost);
 
                     //Remove object form unavaible place
                     Vector3 worldPosOnGrid = new Vector3(hit.collider.gameObject.transform.position.x, tileMap.transform.position.y, hit.collider.gameObject.transform.position.z);
@@ -226,4 +284,8 @@ public class MarketManager : MonoBehaviour
 
     }
 
+
+    public void BuyMoreRam() {
+        Application.OpenURL("https://www.youtube.com/watch?v=1Ug_KCkn-JI");
+    }
 }

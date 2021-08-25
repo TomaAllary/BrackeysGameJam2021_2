@@ -37,6 +37,7 @@ public class Turret : MonoBehaviour
         }
         //Change target
         else {
+            cooldown = 0f;
             Collider[] hitColliders = Physics.OverlapSphere(projectileStartPos.position, range, LayerMask.GetMask("Goat"));
 
             if (hitColliders.Length > 0)
