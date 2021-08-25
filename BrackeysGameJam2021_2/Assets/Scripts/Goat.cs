@@ -46,6 +46,10 @@ public class Goat : Weapon
         GameObject turret = GameObject.Find("Turret(Clone)");
         if(turret != null)
             agent.destination = turret.transform.position;
+        else
+        {
+            agent.destination = goal.position;
+        }
 
         //attack
         if(attackRemainingCD < 0) {
