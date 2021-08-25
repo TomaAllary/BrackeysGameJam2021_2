@@ -3,15 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Goat : MonoBehaviour
+public class Goat : Weapon
 {
     public GameObject healthBar;
     public int currentHealth;
     public Transform goal;
+    public BoxCollider attackBox;
+
     private NavMeshAgent agent;
+    private float attackCooldown;
+    private float attackRemainingCD;
+
     // Start is called before the first frame update
     void Start()
     {
+        attackDamage = 5;
+        isAttacking = true;
+        attackRemainingCD = attackCooldown = 1;
+
         healthBar.GetComponent<HealthBar>().setMaxHealth(Constants.NORMAL_GOAT_HEALTH);
         currentHealth = Constants.NORMAL_GOAT_HEALTH;   
         goal = GameObject.Find("Player").transform;
@@ -34,8 +43,19 @@ public class Goat : MonoBehaviour
         //        Destroy(this.gameObject);
         //    }
         //}
+        GameObject turret = GameObject.Find("Turret(Clone)");
+        if(turret != null)
+            agent.destination = turret.transform.position;
 
-        agent.destination = goal.position;
+        //attack
+        if(attackRemainingCD < 0) {
+            attackBox.enabled = true;
+            if (attackRemainingCD < -(attackCooldown / 3)) {
+                attackBox.enabled = false;
+                attackRemainingCD = attackCooldown;
+            }
+        }
+        attackRemainingCD -= Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)

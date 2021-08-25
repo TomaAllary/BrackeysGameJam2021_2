@@ -353,6 +353,7 @@ GameObject:
   - component: {fileID: 791192823404277825}
   - component: {fileID: 791192823404277854}
   - component: {fileID: 791192823404277853}
+  - component: {fileID: 5897830765560038068}
   m_Layer: 8
   m_Name: Goat
   m_TagString: Untagged
@@ -462,8 +463,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9999999, y: 2.2243268, z: 2.627122}
-  m_Center: {x: -2.7190816e-10, y: -0.096014515, z: -0.95250654}
+  m_Size: {x: 0.9999999, y: 0.79362607, z: 0.6774398}
+  m_Center: {x: -2.1142715e-10, y: -0.10964516, z: 0.022334183}
 --- !u!114 &791192823404277854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -476,9 +477,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e0d9fc793df04a42a534ff7ddd3b2ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDamage: 0
+  isAttacking: 0
   healthBar: {fileID: 2603231272024518037}
   currentHealth: 0
   goal: {fileID: 0}
+  attackBox: {fileID: 5897830765560038068}
 --- !u!54 &791192823404277853
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -495,6 +499,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &5897830765560038068
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791192823404277827}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9999999, y: 1.3086314, z: 1.4709438}
+  m_Center: {x: -2.2792032e-11, y: -0.15431452, z: 0.23547204}
 --- !u!1 &791192823503287393
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,8 @@ public class MarketManager : MonoBehaviour
     private GameObject objToPlace;
     private GameObject objPreview;
 
+    public Camera healthBarsCam;
+
     private BuyableItem actualItemToPlace;
 
     [SerializeField] private Tilemap tileMap;
@@ -276,12 +278,26 @@ public class MarketManager : MonoBehaviour
         Vector3 realPos = tileMap.CellToWorld(pos);
 
         if (Buy(actualItemToPlace)) {
-            Instantiate(objToPlace, realPos, Quaternion.identity);
+            Constructable constructable = Instantiate(objToPlace, realPos, Quaternion.identity).gameObject.GetComponent<Constructable>();
             availablePlaces.Add(pos);
+            constructable.billboard.cam = healthBarsCam.transform;
         }
 
         
 
+    }
+
+    public void DestroyTileObject(GameObject toDestroy) {
+        Vector3 worldPos = toDestroy.transform.position;
+        Vector3Int gridPos = tileMap.WorldToCell(worldPos);
+        if (!availablePlaces.Contains(gridPos))
+            return;
+
+        //Remove object form unavaible place
+        availablePlaces.Remove(gridPos);
+
+        //Destroy object
+        Destroy(toDestroy);
     }
 
 

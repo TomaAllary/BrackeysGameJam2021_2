@@ -3450,6 +3450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37625e9a7b2af904aa8d9afc55c658bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBarsCam: {fileID: 442951153}
   tileMap: {fileID: 294849054}
   availablePlaces: []
   BuyResPanel: {fileID: 117096510}
@@ -22979,7 +22980,8 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 442951154}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5539623914497876587, guid: a1728c217a7764f43b81faf7441f7c7b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a1728c217a7764f43b81faf7441f7c7b, type: 3}
 --- !u!1001 &2675626604947137851
 PrefabInstance:
