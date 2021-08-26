@@ -25,8 +25,10 @@ public class CantMissArrow : Projectile
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Goat")) {
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Goat"))
+        {
             Destroy(gameObject);
         }
     }

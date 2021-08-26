@@ -479,6 +479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 0
   isAttacking: 0
+  push: 0
   healthBar: {fileID: 2603231272024518037}
   currentHealth: 0
   goal: {fileID: 0}

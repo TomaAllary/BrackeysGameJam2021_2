@@ -12,6 +12,7 @@ public class Fireball : Weapon
     {       
         isAttacking = true;
         attackDamage = Constants.FIREBALL_BASIC_ATTACK;
+        push = Constants.FIREBALL_BASIC_PUSH;
     }
 
     private void FixedUpdate()
@@ -19,11 +20,10 @@ public class Fireball : Weapon
         transform.position = (transform.position + transform.forward * Time.fixedDeltaTime * speed);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
         Transform current = gameObject.transform;
         Instantiate(fireballExplosion, current.position, current.rotation);
         Destroy(this.gameObject);
-        
     }
 }

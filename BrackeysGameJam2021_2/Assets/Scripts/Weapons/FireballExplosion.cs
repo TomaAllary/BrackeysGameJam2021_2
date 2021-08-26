@@ -11,6 +11,7 @@ public class FireballExplosion : Weapon
     {
         isAttacking = true;
         attackDamage = Constants.FIREBALL_BASIC_ATTACK;
+        push = Constants.FIREBALL_EXPLOSION_BASIC_PUSH;
     }
 
     // Update is called once per framesaaaaaaa

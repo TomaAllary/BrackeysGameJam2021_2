@@ -13,7 +13,8 @@ public class Goat : Weapon
     private NavMeshAgent agent;
     private float attackCooldown;
     private float attackRemainingCD;
-    private float targetTick;
+    private int stunTick;
+
 
     // Start is called before the first frame update
     void Start()
@@ -21,10 +22,9 @@ public class Goat : Weapon
         attackDamage = 5;
         isAttacking = true;
         attackRemainingCD = attackCooldown = 1;
-        targetTick = 50;
         healthBar.GetComponent<HealthBar>().setMaxHealth(Constants.NORMAL_GOAT_HEALTH);
-        currentHealth = Constants.NORMAL_GOAT_HEALTH;   
-        
+        currentHealth = Constants.NORMAL_GOAT_HEALTH;
+        stunTick = 0;
     }
     private void Awake()
     {
@@ -58,29 +58,48 @@ public class Goat : Weapon
             }
         }
         attackRemainingCD -= Time.deltaTime;
-        //if(targetTick > 0)
-        //    targetTick--;
-        //else
-        //{
-        //    targetTick = 50;
-        //    findTarget(GameObject.Find("Player").transform);
-        //}
-        agent.destination = goal.position;
 
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Weapon") && other.GetComponent<Weapon>().isAttacking)
+        if (stunTick > 0)
+            stunTick--;
+        else
         {
-            currentHealth = currentHealth - other.GetComponent<Weapon>().attackDamage;
-            healthBar.GetComponent<HealthBar>().setHealth(currentHealth);
-            if(currentHealth <= 0)
+            try
             {
-                Destroy(this.gameObject);
-            }        
+                if (agent.enabled == false)
+                    agent.enabled = true;
+                agent.destination = goal.position;
+            }
+            //Means the goat is oob
+            catch
+            {
+                Destroy(gameObject);
+            }
         }
+            
+
     }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.layer == LayerMask.NameToLayer("Weapon") && other.GetComponent<Weapon>().isAttacking)
+    //    {
+    //        currentHealth = currentHealth - other.GetComponent<Weapon>().attackDamage;
+    //        healthBar.GetComponent<HealthBar>().setHealth(currentHealth);
+    //        if(currentHealth <= 0)
+    //        {
+    //            Destroy(this.gameObject);
+    //        }
+    //        agent.enabled = false;
+    //        stunTick = other.GetComponent<Weapon>().attackDamage * 30;
+    //        Vector3 dir = other.transform.position - transform.position;
+    //        dir = -dir.normalized;
+    //        dir = (dir * other.GetComponent<Weapon>().push);
+    //        if (dir.y > 0)
+    //            dir.y = -dir.y;
+    //        gameObject.GetComponent<Rigidbody>().AddForce(dir, ForceMode.VelocityChange);
+    //    }
+
+    //}
 
     //private void findTarget(Transform goal)
     //{
@@ -101,21 +120,29 @@ public class Goat : Weapon
     //            goal = GameObject.Find("Wall(Clone)").transform;
     //            agent.destination = goal.position;
     //        }
-           
+
     //    }
     //    agent.destination = goal.position;
     //}
 
-    //public void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.layer == LayerMask.NameToLayer("Weapon") && collision.gameObject.GetComponent<Weapon>().isAttacking)
-    //    {
-    //        currentHealth = currentHealth - collision.gameObject.GetComponent<Weapon>().attackDamage;
-    //        healthBar.GetComponent<HealthBar>().setHealth(currentHealth);
-    //        if (currentHealth <= 0)
-    //        {
-    //            Destroy(this.gameObject);
-    //        }
-    //    }
-    //}
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Weapon") && collision.gameObject.GetComponent<Weapon>().isAttacking)
+        {
+            currentHealth = currentHealth - collision.gameObject.GetComponent<Weapon>().attackDamage;
+            healthBar.GetComponent<HealthBar>().setHealth(currentHealth);
+            if (currentHealth <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+            agent.enabled = false;
+            stunTick = collision.gameObject.GetComponent<Weapon>().attackDamage * 10;
+            Vector3 dir = collision.contacts[0].point - transform.position;
+            dir = -dir.normalized;
+            dir = (dir * collision.gameObject.GetComponent<Weapon>().push + Vector3.up * collision.gameObject.GetComponent<Weapon>().push*2);
+            gameObject.GetComponent<Rigidbody>().AddForce(dir, ForceMode.Impulse);
+            //gameObject.GetComponent<Rigidbody>().AddForce(dir, ForceMode.VelocityChange);
+        }
+
+    }
 }
