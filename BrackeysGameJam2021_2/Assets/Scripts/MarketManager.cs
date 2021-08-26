@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
-
+using UnityEngine.AI;
 public class MarketManager : MonoBehaviour
 {
     //CONSTRUCTION STUFF
@@ -12,9 +12,10 @@ public class MarketManager : MonoBehaviour
     private GameObject objPreview;
 
     public Camera healthBarsCam;
-
+    
     private BuyableItem actualItemToPlace;
 
+    [SerializeField] public NavMeshSurface[] navMeshSurfaces;
     [SerializeField] private Tilemap tileMap;
     [SerializeField] private List<Vector3> availablePlaces;
     [SerializeField] private GameObject BuyResPanel;
@@ -280,7 +281,11 @@ public class MarketManager : MonoBehaviour
         if (Buy(actualItemToPlace)) {
             Constructable constructable = Instantiate(objToPlace, realPos, Quaternion.identity).gameObject.GetComponent<Constructable>();
             availablePlaces.Add(pos);
-            constructable.billboard.cam = healthBarsCam.transform;
+            //constructable.billboard.cam = healthBarsCam.transform;
+            for (int i = 0; i < navMeshSurfaces.Length; i++)
+            {
+                navMeshSurfaces[i].BuildNavMesh();
+            }
         }
 
         
