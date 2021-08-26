@@ -6,6 +6,7 @@ using UnityEngine;
 public class Fireball : Weapon
 {
     public float speed = Constants.FIREBALL_BASIC_SPEED;
+    public GameObject fireballExplosion;
     // Start is called before the first frame update
     void Start()
     {       
@@ -20,6 +21,9 @@ public class Fireball : Weapon
 
     private void OnTriggerEnter(Collider other)
     {
+        Transform current = gameObject.transform;
+        Instantiate(fireballExplosion, current.position, current.rotation);
         Destroy(this.gameObject);
+        
     }
 }

@@ -290,6 +290,7 @@ MonoBehaviour:
   speed: 8
   mainCamera: {fileID: 0}
   Staff: {fileID: 6142193991947675204}
+  fireball: {fileID: 8720739122866218232, guid: 56b6131d3f0921941b2944638cd66f43, type: 3}
 --- !u!65 &8325154320230039277
 BoxCollider:
   m_ObjectHideFlags: 0
