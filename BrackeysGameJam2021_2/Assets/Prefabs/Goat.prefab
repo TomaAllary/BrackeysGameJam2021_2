@@ -484,6 +484,9 @@ MonoBehaviour:
   currentHealth: 0
   goal: {fileID: 0}
   attackBox: {fileID: 5897830765560038068}
+  branch: {fileID: 5893779795606152116, guid: 39d14cb49c90bae46ad915d9b108a9b6, type: 3}
+  stone: {fileID: 2675626604993681173, guid: 6c435827f0fdcd842ac1f7f4633a6e6c, type: 3}
+  horn: {fileID: 1361268196641148488, guid: 538c270d3d522504a9e84c4d0ac4fad6, type: 3}
 --- !u!54 &791192823404277853
 Rigidbody:
   m_ObjectHideFlags: 0

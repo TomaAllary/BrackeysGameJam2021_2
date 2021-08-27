@@ -91,9 +91,9 @@ public class PlayerMovement : MonoBehaviour
             Destroy(other.gameObject);
             MarketManager.Instance.AddRessource(other.gameObject.tag);
         }
-        if(other.gameObject.layer == LayerMask.NameToLayer("Goat"))
+        if(other.gameObject.layer == LayerMask.NameToLayer("Goat") && other.GetComponent<Weapon>() != null)
         {
-            playerHealth = playerHealth - other.gameObject.GetComponent<Weapon>().attackDamage;
+            playerHealth = playerHealth - other.GetComponent<Weapon>().attackDamage;
             healthBar.setHealth(playerHealth);
             if (playerHealth <= 0)
             {

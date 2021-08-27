@@ -9,7 +9,9 @@ public class Goat : Weapon
     public int currentHealth;
     public Transform goal;
     public BoxCollider attackBox;
-
+    public GameObject branch;
+    public GameObject stone;
+    public GameObject horn;
     private NavMeshAgent agent;
     private float attackCooldown;
     private float attackRemainingCD;
@@ -145,8 +147,11 @@ public class Goat : Weapon
             healthBar.GetComponent<HealthBar>().setHealth(currentHealth);
             if (currentHealth <= 0)
             {
-                //spawnLoot();
+                Vector3 pos = gameObject.transform.position;
+                pos.y = 1;
+                Quaternion rot = gameObject.transform.rotation;               
                 Destroy(this.gameObject);
+                spawnLoot(pos, rot);
             }
             agent.enabled = false;
             gameObject.GetComponent<Rigidbody>().useGravity = false;
@@ -163,9 +168,25 @@ public class Goat : Weapon
 
     }
     
-    private void spawnLoot()
+    private void spawnLoot(Vector3 pos, Quaternion rot)
     {
-
+        int chance = Random.Range(0, 2);
+        if (chance == 1)
+        {
+            int loot = Random.Range(0, 10);
+            if (loot < 6)
+            {
+                 Instantiate(branch, pos, rot);
+            }
+            else if (loot < 9)
+            {
+                Instantiate(stone, pos, rot);
+            }
+            else
+            {
+                Instantiate(horn, pos, rot);
+            }
+        }
     }
 
     //IEnumerator FakeAddForceMotion(Rigidbody rb, Vector3 dir)
