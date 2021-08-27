@@ -7,8 +7,8 @@ public class FireballTurret : Turret
     // Start is called before the first frame update
     void Start()
     {
-        range = Constants.FIREBALL_TURRET_BASIC_RANGE;
-        attackRate = Constants.FIREBALL_TURRET_BASIC_SPEED;
+        range = Constants.CANONBALL_TURRET_BASIC_RANGE;
+        attackRate = Constants.CANONBALL_TURRET_BASIC_SPEED;
         cooldown = 0f;
     }
     void Update()

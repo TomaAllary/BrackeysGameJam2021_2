@@ -12,7 +12,9 @@ public class FireballExplosion : Weapon
         isAttacking = true;
         attackDamage = Constants.FIREBALL_BASIC_ATTACK;
         push = Constants.FIREBALL_EXPLOSION_BASIC_PUSH;
+        gameObject.GetComponent<Transform>().localScale = gameObject.GetComponent<Transform>().localScale * Constants.FIREBALL_EXPLOSION_MAX_SIZE;
     }
+
 
     // Update is called once per framesaaaaaaa
     void Update()

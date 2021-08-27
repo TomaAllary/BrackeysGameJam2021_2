@@ -17,6 +17,9 @@ public class Goat : Weapon
     private float attackRemainingCD;
     private float stunTick;
     private float gravTick;
+    private float deathCounter;
+    private bool isDying;
+    private Color color;
 
 
     // Start is called before the first frame update
@@ -28,6 +31,8 @@ public class Goat : Weapon
         healthBar.GetComponent<HealthBar>().setMaxHealth(Constants.NORMAL_GOAT_HEALTH);
         currentHealth = Constants.NORMAL_GOAT_HEALTH;
         stunTick = 0;
+        isDying = false;
+        color = this.GetComponent<MeshRenderer>().material.color;
     }
     private void Awake()
     {
@@ -89,6 +94,16 @@ public class Goat : Weapon
         {
             gameObject.GetComponent<Rigidbody>().useGravity = true;
         }
+        if(deathCounter > 0)
+        {
+            deathCounter -= Time.deltaTime;
+        }
+        else if (isDying)
+        {
+            StartCoroutine(lastMethod());           
+            //color.a -= Time.deltaTime;
+            //this.GetComponent <MeshRenderer>().material.color = color;
+        }
             
 
     }
@@ -147,25 +162,24 @@ public class Goat : Weapon
             healthBar.GetComponent<HealthBar>().setHealth(currentHealth);
             if (currentHealth <= 0)
             {
-                Vector3 pos = gameObject.transform.position;
-                pos.y = 1;
-                Quaternion rot = gameObject.transform.rotation;               
-                Destroy(this.gameObject);
-                spawnLoot(pos, rot);
+                Quaternion rot = gameObject.transform.rotation;
+                rot.z = -90;
+                gameObject.transform.rotation = rot;
+                gameObject.GetComponent<Rigidbody>().freezeRotation = true;
+                // Doesn't work for some reason
+                color.a = 0.5f;
+                gameObject.GetComponent<MeshRenderer>().material.color = color;
+                gameObject.GetComponent<NavMeshAgent>().enabled = false;
+                deathCounter = 5f;
+                isDying = true;
             }
             agent.enabled = false;
             gameObject.GetComponent<Rigidbody>().useGravity = false;
             stunTick = collision.gameObject.GetComponent<Weapon>().push *2;
             gravTick = collision.gameObject.GetComponent<Weapon>().push/3;
-
-            //Vector3 dir = collision.contacts[0].point - transform.position;
-            //dir = -dir.normalized;
-            //dir = (dir * collision.gameObject.GetComponent<Weapon>().push + Vector3.up * collision.gameObject.GetComponent<Weapon>().push * 10);
             Vector3 dir = Vector3.up * collision.gameObject.GetComponent<Weapon>().push;
             gameObject.GetComponent<Rigidbody>().AddForce(dir, ForceMode.Impulse);
-            //gameObject.GetComponent<Rigidbody>().AddForce(dir, ForceMode.VelocityChange);
         }
-
     }
     
     private void spawnLoot(Vector3 pos, Quaternion rot)
@@ -189,6 +203,15 @@ public class Goat : Weapon
         }
     }
 
+    IEnumerator lastMethod()
+    {
+        Vector3 pos = gameObject.transform.position;
+        pos.y = 1;
+        Quaternion rot = gameObject.transform.rotation;
+        Destroy(this.gameObject);
+        spawnLoot(pos, rot);
+        yield return null;
+    }
     //IEnumerator FakeAddForceMotion(Rigidbody rb, Vector3 dir)
     //{
     //    float i = 0.01f;
