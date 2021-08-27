@@ -12,61 +12,24 @@ public class ThirdPersonCamera : MonoBehaviour
     /// The offset between cam and target stay the same as in the editor
     /// </summary>
     [SerializeField] Transform playerTarget;
-    [SerializeField] float rotateCamSpeed = 100.0f;
+    [SerializeField] float rotateCamSpeed = 5.0f;
 
-    private float forwardOffset;
+    private Vector3 offset;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Vector3 Offset = transform.position - playerTarget.position;
-        Vector3 normal = transform.forward;
-        normal.y = 0.0f;
-
-        forwardOffset = Vector3.Project(Offset, normal).magnitude;
-
+    void Start() {
+        offset = new Vector3(playerTarget.position.x, playerTarget.position.y + 8.0f, playerTarget.position.z + 7.0f);
     }
 
-    private void FixedUpdate() {
-
-        SyncPosWithTarget();
-
-        //Rotate around player on second mouse button
+    void Update() {
         if (Input.GetKey(KeyCode.Mouse1)) {
-
             Cursor.lockState = CursorLockMode.Locked;
-
-            transform.RotateAround(playerTarget.position, Vector3.up, rotateCamSpeed * Input.GetAxis("Mouse X") * Time.deltaTime);
+            offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * rotateCamSpeed, Vector3.up) * offset;
         }
         else {
             Cursor.lockState = CursorLockMode.None;
-
-        }
-    }
-
-    private void SyncPosWithTarget() {
-        //This sync work with the camera right and forward reference
-        //in other words, the difference of position is projected on the RIGHT and FORWARD of the cam
-
-        //Sync with forward of the camera
-        Vector3 actualOffset = transform.position - playerTarget.position;
-        Vector3 normal = transform.forward;
-        normal.y = 0.0f;
-
-        actualOffset = Vector3.Project(actualOffset, normal);
-        if (actualOffset.magnitude != forwardOffset) {
-            float targetOffsetDiff = (actualOffset.normalized * forwardOffset).magnitude - actualOffset.magnitude;
-            transform.position += actualOffset.normalized * targetOffsetDiff;
         }
 
-        //Sync with side movement
-        actualOffset = transform.position - playerTarget.position;
-        normal = transform.right;
-        normal.y = 0.0f;
-
-        actualOffset = Vector3.Project(actualOffset, normal);
-        if (actualOffset.magnitude > 0.1f) {
-            transform.position -= actualOffset;
-        }
+        transform.position = playerTarget.position + offset;
+        transform.LookAt(playerTarget.position);
     }
 }
