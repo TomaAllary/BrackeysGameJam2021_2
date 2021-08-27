@@ -9,7 +9,6 @@ using TMPro;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private GameObject craftingPanel;
-    public Vector3 cameraPosition;
     public float speed = 8.00f;
     public Camera mainCamera;
     public int maxHealth;
@@ -80,10 +79,10 @@ public class PlayerMovement : MonoBehaviour
         if (horizontalInput != 0 || verticalInput != 0)
         {
             direction = horizontalInput * cameraRight + verticalInput * cameraForward;
-            transform.LookAt(transform.position + direction + cameraPosition);
+            transform.LookAt(transform.position + direction);
             //transform.position = (transform.position + direction * Time.fixedDeltaTime * speed);
 
-            rb.MovePosition(transform.position + direction * Time.fixedDeltaTime * speed);
+            rb.MovePosition(transform.position + (direction * Time.fixedDeltaTime * speed);
 
         }
     }
