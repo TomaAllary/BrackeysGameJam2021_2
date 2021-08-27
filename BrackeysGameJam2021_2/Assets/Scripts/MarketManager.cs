@@ -9,7 +9,8 @@ public class MarketManager : MonoBehaviour
 {
     //CONSTRUCTION STUFF
     private GameObject objToPlace;
-    private GameObject objPreview;
+    private GameObject objToPlacePreview;
+    private GameObject objSelectedPreview;
 
     public Camera healthBarsCam;
     
@@ -168,8 +169,10 @@ public class MarketManager : MonoBehaviour
 
     void Start() {
         FindLocationsOfTiles();
-        if (objPreview != null)
-            objPreview = Instantiate(objPreview);
+        if (objToPlacePreview != null) {
+            objToPlacePreview = Instantiate(objToPlacePreview);
+            objToPlacePreview.SetActive(true);
+        }
 
         BuyResPanel.SetActive(false);
     }
@@ -196,76 +199,91 @@ public class MarketManager : MonoBehaviour
 
 
     private void Update() {
-
-        if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0) && objToPlace != null) {
+        //if not over UI
+        if (!EventSystem.current.IsPointerOverGameObject()) {
             Camera cam = Camera.main;
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
+            if (Input.GetMouseButtonDown(0) && objToPlace != null) {
 
-                Vector3 destination = new Vector3(hit.point.x, tileMap.transform.position.y, hit.point.z);
-                Vector3Int gridPos = tileMap.WorldToCell(destination);
-                SpawnObj(gridPos);
-            }
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
 
-        }
-
-        if (objPreview != null) {
-            Camera cam = Camera.main;
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
-
-                Vector3 destination = new Vector3(hit.point.x, tileMap.transform.position.y, hit.point.z);
-                Vector3Int gridPos = tileMap.WorldToCell(destination);
-                //if (availablePlaces.Contains(gridPos))
-                    //play sound maybe
-
-                objPreview.transform.position = tileMap.CellToWorld(gridPos);
-            }
-        }
-
-        if (!EventSystem.current.IsPointerOverGameObject() && Input.GetKey(KeyCode.X)) {
-            Camera cam = Camera.main;
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Construction"))) {
-
-                BuyableItem itemDestroyed = hit.collider.gameObject.GetComponent<BuyableItem>();
-                if (itemDestroyed != null) {
-                    //refund the cost
-                    AddRessource(itemDestroyed.ressourceType + ":" + itemDestroyed.cost);
-
-                    //Remove object form unavaible place
-                    Vector3 worldPosOnGrid = new Vector3(hit.collider.gameObject.transform.position.x, tileMap.transform.position.y, hit.collider.gameObject.transform.position.z);
-                    Vector3Int gridPos = tileMap.WorldToCell(worldPosOnGrid);
-                    availablePlaces.Remove(gridPos);
-
-                    //Destroy object
-                    Destroy(hit.collider.gameObject);
+                    Vector3 destination = new Vector3(hit.point.x, tileMap.transform.position.y, hit.point.z);
+                    Vector3Int gridPos = tileMap.WorldToCell(destination);
+                    SpawnObj(gridPos);
                 }
 
+            }
+
+            if (objToPlacePreview != null) {
+
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Terrain"))) {
+
+                    Vector3 destination = new Vector3(hit.point.x, tileMap.transform.position.y, hit.point.z);
+                    Vector3Int gridPos = tileMap.WorldToCell(destination);
+
+                    objToPlacePreview.transform.position = tileMap.CellToWorld(gridPos);
+                }
+            }
+            else {
+
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Construction"))) {
+
+                    BuyableItem itemSelected = hit.collider.gameObject.GetComponent<BuyableItem>();
+                    if (itemSelected != null && itemSelected.itemPreview != null) {
+                        if(objSelectedPreview == null)
+                            objSelectedPreview = Instantiate(itemSelected.itemPreview);
+
+                        objSelectedPreview.SetActive(true);
+                        objSelectedPreview.transform.position = itemSelected.gameObject.transform.position;
+                    }
+                }
+                else {
+                    if(objSelectedPreview != null)
+                        objSelectedPreview.SetActive(false);
+                }
+            }
+
+            if (Input.GetKey(KeyCode.X)) {
+
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Construction"))) {
+
+                    BuyableItem itemDestroyed = hit.collider.gameObject.GetComponent<BuyableItem>();
+                    if (itemDestroyed != null) {
+                        //refund the cost
+                        AddRessource(itemDestroyed.ressourceType + ":" + itemDestroyed.cost);
+
+                        //Remove object form unavaible place
+                        Vector3 worldPosOnGrid = new Vector3(hit.collider.gameObject.transform.position.x, tileMap.transform.position.y, hit.collider.gameObject.transform.position.z);
+                        Vector3Int gridPos = tileMap.WorldToCell(worldPosOnGrid);
+                        availablePlaces.Remove(gridPos);
+
+                        //Destroy object
+                        Destroy(hit.collider.gameObject);
+                    }
+
+                }
             }
         }
     }
 
     public void SetObjectToPlace(BuyableItem buyableItem) {
-        if (objPreview != null)
-            Destroy(objPreview.gameObject);
+        if (objToPlacePreview != null)
+            Destroy(objToPlacePreview.gameObject);
 
-        objPreview = Instantiate(buyableItem.itemPreview);
+        objToPlacePreview = Instantiate(buyableItem.itemPreview);
+        objToPlacePreview.SetActive(true);
+
         objToPlace = buyableItem.itemModel;
 
         actualItemToPlace = buyableItem;
     }
 
     public void ClearObjectToPlace() {
-        if (objPreview != null)
-            Destroy(objPreview.gameObject);
-        objPreview = null;
+        if (objToPlacePreview != null)
+            Destroy(objToPlacePreview.gameObject);
+        objToPlacePreview = null;
         objToPlace = null;
     }
 
