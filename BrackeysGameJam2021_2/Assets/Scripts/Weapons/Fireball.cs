@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Fireball : Weapon
-{
-    public float speed = Constants.FIREBALL_BASIC_SPEED;
+public class Fireball : Projectile
+{    
     public GameObject fireballExplosion;
-    private int lifeTick;
+    private float lifeTick;
     // Start is called before the first frame update
     void Start()
     {       
         isAttacking = true;
         attackDamage = Constants.FIREBALL_BASIC_ATTACK;
         push = Constants.FIREBALL_BASIC_PUSH;
-        lifeTick = 200;
+        lifeTick = 7;
+        speed = Constants.FIREBALL_BASIC_SPEED;
     }
 
     private void FixedUpdate()
     {
         transform.position = (transform.position + transform.forward * Time.fixedDeltaTime * speed);
-        lifeTick = lifeTick - 1;
+        lifeTick -= Time.deltaTime;
         if (lifeTick <= 0)            
             Destroy(gameObject);
     }

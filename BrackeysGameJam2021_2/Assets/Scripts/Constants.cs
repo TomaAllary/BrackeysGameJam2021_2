@@ -18,7 +18,7 @@ public static class Constants
 
     public const int FIREBALL_BASIC_ATTACK = 15;
     public const float FIREBALL_BASIC_PUSH = 0;
-    public const float FIREBALL_BASIC_SPEED = 2f;
+    public const float FIREBALL_BASIC_SPEED = 10;
 
     public const int FIREBALL_EXPLOSION_BASIC_ATTACK = 8;
     public const float FIREBALL_EXPLOSION_BASIC_PUSH = 2.8f;
@@ -26,4 +26,10 @@ public static class Constants
 
     public static int CANT_MISS_ARROW_ATTACK = 15;
     public static float CANT_MISS_ARROW_BASIC_PUSH = 0;
+
+    public static float ARROW_TURRET_BASIC_SPEED = .1f;
+    public static int ARROW_TURRET_BASIC_RANGE = 30;
+
+    public static float FIREBALL_TURRET_BASIC_SPEED = 5f;
+    public static int FIREBALL_TURRET_BASIC_RANGE = 20;
 }
