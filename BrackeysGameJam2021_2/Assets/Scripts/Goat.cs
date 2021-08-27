@@ -13,7 +13,8 @@ public class Goat : Weapon
     private NavMeshAgent agent;
     private float attackCooldown;
     private float attackRemainingCD;
-    private int stunTick;
+    private float stunTick;
+    private float gravTick;
 
 
     // Start is called before the first frame update
@@ -63,14 +64,13 @@ public class Goat : Weapon
         attackRemainingCD -= Time.deltaTime;
 
         if (stunTick > 0)
-            stunTick--;
+            stunTick-= Time.deltaTime;
         else
         {
             try
             {
                 if (agent.enabled == false)
-                    agent.enabled = true;
-                gameObject.GetComponent<Rigidbody>().useGravity = true;
+                    agent.enabled = true;              
                 agent.destination = goal.position;
             }
             //Means the goat is oob
@@ -78,6 +78,14 @@ public class Goat : Weapon
             {
                 Destroy(gameObject);
             }
+        }
+        if (gravTick > 0)
+        {
+            gravTick -= Time.deltaTime;
+        }
+        else
+        {
+            gameObject.GetComponent<Rigidbody>().useGravity = true;
         }
             
 
@@ -141,7 +149,8 @@ public class Goat : Weapon
             }
             agent.enabled = false;
             gameObject.GetComponent<Rigidbody>().useGravity = false;
-            stunTick = (int)(collision.gameObject.GetComponent<Weapon>().push * 10);
+            stunTick = collision.gameObject.GetComponent<Weapon>().push *2;
+            gravTick = collision.gameObject.GetComponent<Weapon>().push/3;
 
             //Vector3 dir = collision.contacts[0].point - transform.position;
             //dir = -dir.normalized;
