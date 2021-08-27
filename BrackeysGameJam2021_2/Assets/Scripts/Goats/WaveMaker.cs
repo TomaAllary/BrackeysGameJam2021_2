@@ -31,7 +31,7 @@ public class WaveMaker : MonoBehaviour
 
     public void timesUp()
     {
-        if (wave == 0)
+        if (wave == 0) 
         {
             spawnWave(20, goat);
             timer = 60;
