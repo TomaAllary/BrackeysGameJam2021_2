@@ -47,7 +47,10 @@ public class Goat : Weapon
         //    agent.destination = goal.position;
         //}
 
-
+        if(gameObject.transform.position.y < -10)
+        {
+            Destroy(gameObject);
+        }
 
         //attack
         if(attackRemainingCD < 0) {
@@ -67,6 +70,7 @@ public class Goat : Weapon
             {
                 if (agent.enabled == false)
                     agent.enabled = true;
+                gameObject.GetComponent<Rigidbody>().useGravity = true;
                 agent.destination = goal.position;
             }
             //Means the goat is oob
@@ -136,13 +140,29 @@ public class Goat : Weapon
                 Destroy(this.gameObject);
             }
             agent.enabled = false;
-            stunTick = collision.gameObject.GetComponent<Weapon>().attackDamage * 10;
-            Vector3 dir = collision.contacts[0].point - transform.position;
-            dir = -dir.normalized;
-            dir = (dir * collision.gameObject.GetComponent<Weapon>().push + Vector3.up * collision.gameObject.GetComponent<Weapon>().push*2);
+            gameObject.GetComponent<Rigidbody>().useGravity = false;
+            stunTick = (int)(collision.gameObject.GetComponent<Weapon>().push * 10);
+
+            //Vector3 dir = collision.contacts[0].point - transform.position;
+            //dir = -dir.normalized;
+            //dir = (dir * collision.gameObject.GetComponent<Weapon>().push + Vector3.up * collision.gameObject.GetComponent<Weapon>().push * 10);
+            Vector3 dir = Vector3.up * collision.gameObject.GetComponent<Weapon>().push;
             gameObject.GetComponent<Rigidbody>().AddForce(dir, ForceMode.Impulse);
             //gameObject.GetComponent<Rigidbody>().AddForce(dir, ForceMode.VelocityChange);
         }
 
     }
+
+    //IEnumerator FakeAddForceMotion(Rigidbody rb, Vector3 dir)
+    //{
+    //    float i = 0.01f;
+    //    while (100 > i)
+    //    {
+    //        rb.gameObject.GetComponent<Rigidbody>().velocity = dir; 
+    //        i = i + Time.deltaTime;
+    //        //yield return new WaitForEndOfFrame();
+    //    }
+    //    rb.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+    //    yield return null;
+    //}
 }

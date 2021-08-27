@@ -282,10 +282,10 @@ public class MarketManager : MonoBehaviour
             Constructable constructable = Instantiate(objToPlace, realPos, Quaternion.identity).gameObject.GetComponent<Constructable>();
             availablePlaces.Add(pos);
             //constructable.billboard.cam = healthBarsCam.transform;
-            for (int i = 0; i < navMeshSurfaces.Length; i++)
-            {
-                navMeshSurfaces[i].BuildNavMesh();
-            }
+            //for (int i = 0; i < navMeshSurfaces.Length; i++)
+            //{
+            //    navMeshSurfaces[i].BuildNavMesh();
+            //}
         }
 
         
