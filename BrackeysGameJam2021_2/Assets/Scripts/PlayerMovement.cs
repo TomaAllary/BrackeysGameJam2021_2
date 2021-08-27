@@ -12,11 +12,12 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 cameraPosition;
     public float speed = 8.00f;
     public Camera mainCamera;
+    public int playerHealth;
 
     private GameObject player;
     public GameObject Staff;
     public GameObject fireball;
-
+    private HealthBar healthBar;
     private Vector3 direction;
     private float horizontalInput;
     private float verticalInput;
@@ -31,6 +32,9 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         canAttack = true;
         attackCoolDown = 0f;
+        playerHealth = Constants.NORMAL_PLAYER_HEALTH;
+        healthBar = gameObject.GetComponentInChildren<HealthBar>();
+        healthBar.setMaxHealth(playerHealth);
     }
 
     private void Update()
@@ -80,13 +84,26 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider collider)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collider.gameObject.layer == LayerMask.NameToLayer("Loot"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Loot"))
         {
-            Destroy(collider.gameObject);
-
-            MarketManager.Instance.AddRessource(collider.gameObject.tag);
+            Destroy(other.gameObject);
+            MarketManager.Instance.AddRessource(other.gameObject.tag);
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Goat") && collision.gameObject.GetComponent<Weapon>().isAttacking)
+        {
+            playerHealth = playerHealth - collision.gameObject.GetComponent<Weapon>().attackDamage;
+            healthBar.setHealth(playerHealth);
+            if (playerHealth <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
 }

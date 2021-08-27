@@ -9,6 +9,8 @@ public static class Constants
     public const int LapisLazulis = 2;
     public const int Horn = 3;
 
+    public const int NORMAL_PLAYER_HEALTH = 1000;
+
     public const int NORMAL_GOAT_HEALTH = 100;
 
     public const int STAFF_BASIC_ATTACK = 7;
