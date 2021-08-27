@@ -82,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
             transform.LookAt(transform.position + direction);
             //transform.position = (transform.position + direction * Time.fixedDeltaTime * speed);
 
-            rb.MovePosition(transform.position + (direction * Time.fixedDeltaTime * speed);
+            rb.MovePosition(transform.position + (direction * Time.fixedDeltaTime * speed));
 
         }
     }
