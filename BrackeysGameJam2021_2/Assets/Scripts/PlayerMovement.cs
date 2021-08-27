@@ -91,13 +91,9 @@ public class PlayerMovement : MonoBehaviour
             Destroy(other.gameObject);
             MarketManager.Instance.AddRessource(other.gameObject.tag);
         }
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Goat") && collision.gameObject.GetComponent<Weapon>().isAttacking)
+        if(other.gameObject.layer == LayerMask.NameToLayer("Goat"))
         {
-            playerHealth = playerHealth - collision.gameObject.GetComponent<Weapon>().attackDamage;
+            playerHealth = playerHealth - other.gameObject.GetComponent<Weapon>().attackDamage;
             healthBar.setHealth(playerHealth);
             if (playerHealth <= 0)
             {
@@ -105,5 +101,18 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+        
+    //    if (collision.gameObject.layer == LayerMask.NameToLayer("Goat") && collision.gameObject.GetComponent<Weapon>().isAttacking)
+    //    {
+    //        playerHealth = playerHealth - collision.gameObject.GetComponent<Weapon>().attackDamage;
+    //        healthBar.setHealth(playerHealth);
+    //        if (playerHealth <= 0)
+    //        {
+    //            Destroy(gameObject);
+    //        }
+    //    }
+    //}
 
 }

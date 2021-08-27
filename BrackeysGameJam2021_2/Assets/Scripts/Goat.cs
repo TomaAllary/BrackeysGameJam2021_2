@@ -145,6 +145,7 @@ public class Goat : Weapon
             healthBar.GetComponent<HealthBar>().setHealth(currentHealth);
             if (currentHealth <= 0)
             {
+                //spawnLoot();
                 Destroy(this.gameObject);
             }
             agent.enabled = false;
@@ -159,6 +160,11 @@ public class Goat : Weapon
             gameObject.GetComponent<Rigidbody>().AddForce(dir, ForceMode.Impulse);
             //gameObject.GetComponent<Rigidbody>().AddForce(dir, ForceMode.VelocityChange);
         }
+
+    }
+    
+    private void spawnLoot()
+    {
 
     }
 
