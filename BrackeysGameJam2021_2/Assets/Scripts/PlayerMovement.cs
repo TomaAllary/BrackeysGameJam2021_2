@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     private float verticalInput;
     private bool canAttack;
     private float attackCoolDown;
+    public AudioClip step;
+    private float steptick;
 
     private Rigidbody rb;
     // Start is called before the first frame update
@@ -37,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         //healthBar = gameObject.GetComponentInChildren<HealthBar>();
         GameObject.Find("PlayerHealthbar");
         healthBar.setMaxHealth(playerHealth);
+        steptick = 0;
     }
 
     private void Update()
@@ -84,8 +87,15 @@ public class PlayerMovement : MonoBehaviour
             //transform.position = (transform.position + direction * Time.fixedDeltaTime * speed);
 
             rb.MovePosition(transform.position + (direction * Time.fixedDeltaTime * speed));
-
+            if (steptick <= 0)
+            {
+                gameObject.GetComponentInChildren<AudioSource>().PlayOneShot(step);
+                steptick = .4f;
+            }               
         }
+
+        if (steptick > 0)
+            steptick -= Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)

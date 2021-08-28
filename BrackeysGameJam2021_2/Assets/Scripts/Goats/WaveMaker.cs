@@ -43,8 +43,8 @@ public class WaveMaker : MonoBehaviour
             spawnWave(30, goat);
             timer = 120;
         }
-        wave++;
         gameObject.GetComponent<Timer>().startTimer(timer);
+        wave++;
     }
     public void spawnWave(int number, Goat goat)
     {
