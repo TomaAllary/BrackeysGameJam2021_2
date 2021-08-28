@@ -24,7 +24,7 @@ public class Staff : Weapon
             if (!timerStarted)
             {
                 timerStarted = true;
-                attackTimer = 0.5f;
+                attackTimer = 0.1f;
             }
             else
             {

@@ -129,4 +129,18 @@ public class PlayerMovement : MonoBehaviour
     //    }
     //}
 
+
+    public void UpgradeMaxHealth() {
+        float healthRatio = (float)healthBar.getMaxHealth() / (float)healthBar.getHealth();
+        healthBar.setMaxHealth((int)(healthBar.getMaxHealth() * 1.1f));
+        healthBar.setHealth((int)(healthBar.getMaxHealth() * healthRatio));
+    }
+
+    public void UpgradeMovementSpeed() {
+        speed += 2.5f;
+    }
+
+    public void UpgradeAttackDmg() {
+        Staff.GetComponent<Staff>().attackDamage += (int)(1.5 * Staff.GetComponent<Staff>().attackDamage);
+    }
 }

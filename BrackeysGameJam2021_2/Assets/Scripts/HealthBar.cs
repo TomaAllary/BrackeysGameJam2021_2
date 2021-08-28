@@ -23,4 +23,12 @@ public class HealthBar : MonoBehaviour
         fill.color = gradient.Evaluate(slider.normalizedValue);
     }
 
+    public int getMaxHealth() {
+        return (int)slider.maxValue;
+    }
+
+    public int getHealth() {
+        return (int)slider.value;
+    }
+
 }
