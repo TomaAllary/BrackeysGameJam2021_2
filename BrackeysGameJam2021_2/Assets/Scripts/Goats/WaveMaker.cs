@@ -9,6 +9,7 @@ public class WaveMaker : MonoBehaviour
     public float timer;
     public int wave;
     public PlayerMovement player;
+    public AudioClip goatScream;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +17,7 @@ public class WaveMaker : MonoBehaviour
         timer = 20;
         gameObject.GetComponent<Timer>().startTimer(timer);
         wave = 0;
+       
     }
 
     // Update is called once per frame
@@ -48,6 +50,8 @@ public class WaveMaker : MonoBehaviour
     {
         player.playerHealth = player.maxHealth;
         player.healthBar.setHealth(player.maxHealth);
+        if (wave != 0)
+            gameObject.GetComponentInChildren<AudioSource>().PlayOneShot(goatScream);
         foreach (SpawnZone s in spawnPoints)
         {          
             StartCoroutine(s.spawnGoats(number, goat));
