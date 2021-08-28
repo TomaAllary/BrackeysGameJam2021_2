@@ -10,14 +10,26 @@ public class WaveMaker : MonoBehaviour
     public int wave;
     public PlayerMovement player;
     public AudioClip goatScream;
+    public AudioClip countDown;
+    public AudioClip mainTheme;
+    public AudioClip waveTheme;
+    public AudioSource mainSource;
+
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player").GetComponent<PlayerMovement>();
+
+   
+    }
+
+    private void Awake()
+    {
         timer = 20;
-        gameObject.GetComponent<Timer>().startTimer(timer);
         wave = 0;
-       
+        player = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        gameObject.GetComponent<Timer>().startTimer(timer);
+        mainSource = GameObject.Find("Ambiance").GetComponentInChildren<AudioSource>();
+        mainSource.PlayOneShot(mainTheme);
     }
 
     // Update is called once per frame
@@ -26,6 +38,8 @@ public class WaveMaker : MonoBehaviour
         if (timer > 0)
         {
             timer -= Time.deltaTime;
+            if (timer > 3 && timer < 4)
+                gameObject.GetComponent<AudioSource>().PlayOneShot(countDown);
         }
         else
             timesUp();
@@ -49,9 +63,10 @@ public class WaveMaker : MonoBehaviour
     public void spawnWave(int number, Goat goat)
     {
         player.playerHealth = player.maxHealth;
-        player.healthBar.setHealth(player.maxHealth);
-        if (wave != 0)
-            gameObject.GetComponentInChildren<AudioSource>().PlayOneShot(goatScream);
+        player.healthBar.setHealth(player.maxHealth);        
+        //gameObject.GetComponentInChildren<AudioSource>().PlayOneShot(goatScream);
+        mainSource.Stop();
+        mainSource.PlayOneShot(waveTheme);
         foreach (SpawnZone s in spawnPoints)
         {          
             StartCoroutine(s.spawnGoats(number, goat));

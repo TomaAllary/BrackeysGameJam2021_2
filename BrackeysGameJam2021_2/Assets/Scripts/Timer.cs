@@ -10,12 +10,18 @@ public class Timer : MonoBehaviour
     public float timeRemainig;
     public bool timerIsRunning;
     public TextMeshProUGUI timer;
+    public AudioSource mainSource;
+    private float halfTime;
+    private bool themeChanged;
+    public AudioClip mainTheme;
     void Start()
     {
         timer.color = new Color32(255,255, 255,255);
-        timeRemainig = 0;
-        DisplayTimer();
-        timerIsRunning = false;
+        mainSource = GameObject.Find("Ambiance").GetComponent<AudioSource>();
+        themeChanged = true;
+        //timeRemainig = 0;
+        //DisplayTimer();
+        //timerIsRunning = false;
     }
 
     // Update is called once per frame
@@ -25,6 +31,13 @@ public class Timer : MonoBehaviour
         {
             timeRemainig -= Time.deltaTime;
             DisplayTimer();
+            if(timeRemainig < halfTime && !themeChanged)
+            {
+                mainSource.Stop();
+                mainSource.PlayOneShot(mainTheme);
+                themeChanged = true;
+            }
+
         }
         else
         {
@@ -53,6 +66,8 @@ public class Timer : MonoBehaviour
     public void startTimer(float time)
     {
         timeRemainig = time;
+        halfTime = time / 2;
         timerIsRunning = true;
+        themeChanged = false;
     }
 }

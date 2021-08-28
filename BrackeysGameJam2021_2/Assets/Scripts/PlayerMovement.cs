@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private float attackCoolDown;
     private float fireballCoolDown;
     public AudioClip step;
+    public AudioClip stick;
     private float steptick;
 
     private float fireballTimer;
@@ -59,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetKey(KeyCode.Mouse0) && canAttack) {
             attackCoolDown = 0.5f;
             canAttack = false;
+            gameObject.GetComponent<AudioSource>().PlayOneShot(stick);
             Staff.GetComponent<Staff>().isAttacking = true;          
         }
 

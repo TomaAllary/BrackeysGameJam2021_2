@@ -7,6 +7,8 @@ public class Constructable : MonoBehaviour
     public HealthBar healthBar;
     public Billboard billboard;
     public int currentHealth;
+    public AudioClip woodDestruct;
+    public AudioClip stoneDestruct;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,14 @@ public class Constructable : MonoBehaviour
             currentHealth = currentHealth - other.GetComponent<Weapon>().attackDamage;
             healthBar.setHealth(currentHealth);
             if (currentHealth <= 0) {
+                if (gameObject.CompareTag("wood"))
+                {
+                    GameObject.Find("ExplosionManager").GetComponent<AudioSource>().PlayOneShot(woodDestruct);
+                }
+                else if (gameObject.CompareTag("stone"))
+                {
+                    GameObject.Find("ExplosionManager").GetComponent<AudioSource>().PlayOneShot(stoneDestruct);
+                }
                 MarketManager.Instance.DestroyTileObject(this.gameObject);
             }
         }

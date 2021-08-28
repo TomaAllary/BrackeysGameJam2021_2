@@ -20,6 +20,8 @@ public class Goat : Weapon
     private float deathCounter;
     private bool isDying;
     private Color color;
+    public AudioClip[] goatCries;
+    public AudioClip hit;
 
 
     // Start is called before the first frame update
@@ -104,7 +106,13 @@ public class Goat : Weapon
             //color.a -= Time.deltaTime;
             //this.GetComponent <MeshRenderer>().material.color = color;
         }
-            
+
+        int cry = Random.Range(0, 50000);
+        if (cry == 50)
+        {
+            int selectCry = Random.Range(0, goatCries.Length);
+            gameObject.GetComponent<AudioSource>().PlayOneShot(goatCries[selectCry]);
+        }
 
     }
 
@@ -158,6 +166,10 @@ public class Goat : Weapon
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Weapon") && collision.gameObject.GetComponent<Weapon>().isAttacking)
         {
+            if(collision.gameObject.name == "Staff")
+            {
+                gameObject.GetComponent<AudioSource>().PlayOneShot(hit);
+            }
             currentHealth = currentHealth - collision.gameObject.GetComponent<Weapon>().attackDamage;
             healthBar.GetComponent<HealthBar>().setHealth(currentHealth);
             if (currentHealth <= 0)

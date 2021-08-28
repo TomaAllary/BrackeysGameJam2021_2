@@ -188,6 +188,8 @@ MonoBehaviour:
   attackDamage: 0
   isAttacking: 0
   push: 0
+  explosionSource: {fileID: 0}
+  explosionSound: {fileID: 8300000, guid: f20849a9c3dee3a4ab99f2b088c19509, type: 3}
 --- !u!54 &5752323287391614581
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -6,6 +6,8 @@ using UnityEngine;
 public class FireballExplosion : Weapon
 {
     private int existancetick = 10;
+    public AudioSource explosionSource;
+    public AudioClip explosionSound;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +19,11 @@ public class FireballExplosion : Weapon
 
     }
 
+    private void Awake()
+    {
+        explosionSource = GameObject.Find("ExplosionManager").GetComponent<AudioSource>();
+        explosionSource.PlayOneShot(explosionSound);
+    }
 
     // Update is called once per framesaaaaaaa
     void Update()

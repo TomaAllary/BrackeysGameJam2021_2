@@ -8,6 +8,8 @@ TagManager:
   - Rock
   - Wood
   - Projectile
+  - wood
+  - stone
   layers:
   - Default
   - TransparentFX

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CanonballExplosion : FireballExplosion
 {
+    public AudioSource explosionSource;
+    public AudioClip explosionSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -12,6 +14,11 @@ public class CanonballExplosion : FireballExplosion
         gameObject.GetComponent<Transform>().localScale = gameObject.GetComponent<Transform>().localScale * Constants.CANONBALL_EXPLOSION_MAX_SIZE;
     }
 
+    private void Awake()
+    {
+        explosionSource = GameObject.Find("ExplosionManager").GetComponent<AudioSource>();
+        explosionSource.PlayOneShot(explosionSound);
+    }
     // Update is called once per frame
     void Update()
     {
