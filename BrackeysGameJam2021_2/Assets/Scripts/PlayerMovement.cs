@@ -34,7 +34,8 @@ public class PlayerMovement : MonoBehaviour
         attackCoolDown = 0f;
         playerHealth = Constants.NORMAL_PLAYER_HEALTH;
         maxHealth = playerHealth;
-        healthBar = gameObject.GetComponentInChildren<HealthBar>();
+        //healthBar = gameObject.GetComponentInChildren<HealthBar>();
+        GameObject.Find("PlayerHealthbar");
         healthBar.setMaxHealth(playerHealth);
     }
 
