@@ -145,7 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 7416344245782104618}
   billboard: {fileID: 7416344244504253721}
-  currentHealth: 100
+  currentHealth: 200
 --- !u!1001 &5203431557231655693
 PrefabInstance:
   m_ObjectHideFlags: 0
