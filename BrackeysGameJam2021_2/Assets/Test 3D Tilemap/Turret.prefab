@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   label: {fileID: 0}
-  itemPreview: {fileID: 5971231874105099807, guid: f20ffe50b752e5746aff33aa7ead2802, type: 3}
+  itemPreview: {fileID: 5197050500416665394, guid: 8d7573c2f21473945af0de9a7f920e65, type: 3}
   itemModel: {fileID: 6550100664853535473}
   ressourceType: Wood
   cost: 20
@@ -212,6 +212,7 @@ MonoBehaviour:
   projectile: {fileID: 8551823175543773428, guid: 75fa9ba22af5e9e43882db0df955075f, type: 3}
   projectileStartPos: {fileID: 3883304696043196684}
   attackRate: 0
+  attackDmg: 0
   range: 30
 --- !u!114 &5223823365012958548
 MonoBehaviour:

@@ -23,7 +23,7 @@ public class MarketManager : MonoBehaviour
     public GameObject fireRateUpgradeBar;
 
     private BuyableItem actualItemToPlace;
-    private Constructable selectedItem;
+    public Constructable selectedItem;
 
     [SerializeField] public NavMeshSurface[] navMeshSurfaces;
     [SerializeField] private Tilemap tileMap;
@@ -172,6 +172,9 @@ public class MarketManager : MonoBehaviour
 
     public void RefreshItemUpgradePanel() {
         if (selectedItem == null) {
+            Destroy(objSelectedPreview);
+            objSelectedPreview = null;
+
             itemSelectedLabel.text = "No item selected";
             healthUpgradeBar.SetActive(false);
             dmgUpgradeBar.SetActive(false);
@@ -204,6 +207,7 @@ public class MarketManager : MonoBehaviour
             }
         }
     }
+
 
     public void UpgradeItemMaxHealth() {
         if (selectedItem != null) {
@@ -300,9 +304,11 @@ public class MarketManager : MonoBehaviour
                         BuyableItem itemSelected = hit.collider.gameObject.GetComponent<BuyableItem>();
                         Constructable constructionSelected = hit.collider.gameObject.GetComponent<Constructable>();
 
+                        Destroy(objSelectedPreview);
+                        objSelectedPreview = null;
+
                         if (itemSelected != null && itemSelected.itemPreview != null && constructionSelected != null) {
-                            if (objSelectedPreview == null)
-                                objSelectedPreview = Instantiate(itemSelected.itemPreview);
+                            objSelectedPreview = Instantiate(itemSelected.itemPreview);
 
                             objSelectedPreview.SetActive(true);
                             objSelectedPreview.transform.position = itemSelected.gameObject.transform.position;
@@ -314,8 +320,8 @@ public class MarketManager : MonoBehaviour
                     else {
                         selectedItem = null;
 
-                        if (objSelectedPreview != null)
-                            objSelectedPreview.SetActive(false);
+                        Destroy(objSelectedPreview);
+                        objSelectedPreview = null;
                     }
                     RefreshItemUpgradePanel();
                 }

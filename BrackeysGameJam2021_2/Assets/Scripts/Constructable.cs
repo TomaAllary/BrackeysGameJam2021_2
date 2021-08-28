@@ -87,4 +87,10 @@ public class Constructable : Upgradable
             }
         }
     }
+
+    private void OnDestroy() {
+        if (MarketManager.Instance.selectedItem == this)
+            MarketManager.Instance.selectedItem = null;
+        MarketManager.Instance.RefreshItemUpgradePanel();
+    }
 }
