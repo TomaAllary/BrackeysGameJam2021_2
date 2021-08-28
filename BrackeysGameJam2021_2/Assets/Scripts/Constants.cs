@@ -21,6 +21,7 @@ public static class Constants
     public const float FIREBALL_BASIC_SPEED = 10;
 
     public const int CANONBALL_BASIC_ATTACK = 15;
+    public static float FIREBALL_COOLDOWN = 1;
     public const float CANONBALL_BASIC_PUSH = 0;
     public const float CANONBALL_BASIC_SPEED = 10;
 
@@ -40,4 +41,5 @@ public static class Constants
 
     public static float CANONBALL_TURRET_BASIC_SPEED = 5f;
     public static int CANONBALL_TURRET_BASIC_RANGE = 20;
+
 }

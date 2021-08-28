@@ -13,7 +13,8 @@ public class MarketManager : MonoBehaviour
     private GameObject objSelectedPreview;
 
     public Camera healthBarsCam;
-    
+    public GameObject upgradePanel;
+
     private BuyableItem actualItemToPlace;
 
     [SerializeField] public NavMeshSurface[] navMeshSurfaces;
@@ -154,6 +155,10 @@ public class MarketManager : MonoBehaviour
     }
     public void CloseBuyResPanel() {
         BuyResPanel.SetActive(false);
+    }
+
+    public void ToggleUpgradePanel() {
+        upgradePanel.SetActive(!upgradePanel.activeSelf);
     }
 
 

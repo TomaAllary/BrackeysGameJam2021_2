@@ -23,8 +23,14 @@ public class PlayerMovement : MonoBehaviour
     private float verticalInput;
     private bool canAttack;
     private float attackCoolDown;
+    private float fireballCoolDown;
     public AudioClip step;
     private float steptick;
+
+    private float fireballTimer;
+    private float fireballExplosionSize;
+
+    private float fireballDmg;
 
     private Rigidbody rb;
     // Start is called before the first frame update
@@ -34,6 +40,11 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         canAttack = true;
         attackCoolDown = 0f;
+        fireballCoolDown = Constants.FIREBALL_COOLDOWN;
+        fireballTimer = fireballCoolDown;
+        fireballExplosionSize = Constants.FIREBALL_EXPLOSION_MAX_SIZE;
+        fireballDmg = Constants.FIREBALL_BASIC_ATTACK;
+
         playerHealth = Constants.NORMAL_PLAYER_HEALTH;
         maxHealth = playerHealth;
         //healthBar = gameObject.GetComponentInChildren<HealthBar>();
@@ -55,9 +66,13 @@ public class PlayerMovement : MonoBehaviour
             Staff.GetComponent<Staff>().isAttacking = true;          
         }
 
-        else if (Input.GetKeyDown(KeyCode.Space))
+        else if (Input.GetKeyDown(KeyCode.Space) && fireballTimer < 0)
         {
-            Instantiate(fireball, (transform.position + (transform.forward * 5)), transform.rotation);
+            Fireball ball = Instantiate(fireball, (transform.position + (transform.forward * 5)), transform.rotation).GetComponent<Fireball>();
+            //ball.setExplosionSize(fireballExplosionSize);
+            ball.attackDamage = (int)fireballDmg;
+
+            fireballTimer = fireballCoolDown;
         }
         if (!canAttack)
         {
@@ -69,6 +84,8 @@ public class PlayerMovement : MonoBehaviour
                 canAttack = true;
             }
         }
+
+        fireballTimer -= Time.deltaTime;
     }
 
     private void FixedUpdate()
@@ -130,17 +147,41 @@ public class PlayerMovement : MonoBehaviour
     //}
 
 
-    public void UpgradeMaxHealth() {
-        float healthRatio = (float)healthBar.getMaxHealth() / (float)healthBar.getHealth();
-        healthBar.setMaxHealth((int)(healthBar.getMaxHealth() * 1.1f));
-        healthBar.setHealth((int)(healthBar.getMaxHealth() * healthRatio));
+    public void UpgradeMaxHealth(UpgradeBar action) {
+        if (action.Upgrade("1")) {
+            float healthRatio = (float)healthBar.getMaxHealth() / (float)healthBar.getHealth();
+            healthBar.setMaxHealth((int)(healthBar.getMaxHealth() * 1.1f));
+            healthBar.setHealth((int)(healthBar.getMaxHealth() * healthRatio));
+        }
     }
 
-    public void UpgradeMovementSpeed() {
-        speed += 2.5f;
+    public void UpgradeMovementSpeed(UpgradeBar action) {
+        if (action.Upgrade("1")) {
+            speed += 2.5f;
+        }
     }
 
-    public void UpgradeAttackDmg() {
-        Staff.GetComponent<Staff>().attackDamage += (int)(1.5 * Staff.GetComponent<Staff>().attackDamage);
+    public void UpgradeAttackDmg(UpgradeBar action) {
+        if (action.Upgrade("1")) {
+            Staff.GetComponent<Staff>().attackDamage += (int)(1.5 * Staff.GetComponent<Staff>().attackDamage);
+        }
+    }
+
+    public void UpgradeFireballRate(UpgradeBar action) {
+        if (action.Upgrade("1")) {
+            fireballCoolDown *= 0.7f;
+        }
+    }
+
+    public void UpgradeFireballExplosion(UpgradeBar action) {
+        if (action.Upgrade("1")) {
+            fireballExplosionSize *= 1.1f;
+        }
+    }
+
+    public void UpgradeFireballDmg(UpgradeBar action) {
+        if (action.Upgrade("1")) {
+            fireballDmg *= 1.1f;
+        }
     }
 }
