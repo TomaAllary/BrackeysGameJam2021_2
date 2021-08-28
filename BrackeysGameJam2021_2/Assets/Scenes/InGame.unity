@@ -19053,7 +19053,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   label: {fileID: 1498375361}
   itemPreview: {fileID: 6550100664853535473, guid: ce2dbf4298a083c4db8abe2bac63aa16, type: 3}
-  itemModel: {fileID: 6550100664853535473, guid: 8c65ba0179d844944b406606e78ef48a, type: 3}
+  itemModel: {fileID: 1355843759777458557, guid: 44d0ad2b98a30634e9aef0880e770c91, type: 3}
   ressourceType: Rock
   cost: 1
   marketName: Wall
@@ -21876,7 +21876,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2013543207
 MonoBehaviour:
@@ -23226,7 +23226,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2154336338675759376, guid: 742a39b80d97c704882143643fb6b5a9, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2154336338675759376, guid: 742a39b80d97c704882143643fb6b5a9, type: 3}
       propertyPath: m_LocalPosition.x
