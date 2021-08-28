@@ -25,9 +25,14 @@ public class UpgradeBar : MonoBehaviour
         
     }
 
+    public void SetLevel(int level) {
+        pointBar.setHealth(level);
+        currentLevel = level;
+    }
+
     public bool Upgrade(string cost) {
         if (currentLevel < maxStack) {
-            if (MarketManager.Instance.SellRessourceWithoutRefund("Horn:" + cost)) {
+            if (MarketManager.Instance.SellRessourceWithoutRefund(cost)) {
                 pointBar.setHealth(++currentLevel);
                 return true;
             }

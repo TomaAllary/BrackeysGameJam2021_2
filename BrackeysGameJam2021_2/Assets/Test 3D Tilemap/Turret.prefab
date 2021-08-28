@@ -163,8 +163,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   label: {fileID: 0}
-  itemPreview: {fileID: 0}
-  itemModel: {fileID: 0}
+  itemPreview: {fileID: 5971231874105099807, guid: f20ffe50b752e5746aff33aa7ead2802, type: 3}
+  itemModel: {fileID: 6550100664853535473}
   ressourceType: Wood
   cost: 20
   marketName: Turret
@@ -225,9 +225,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba78cedceb9bc84c95d6fa69979ecbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canAttack: 1
   healthBar: {fileID: 8183648340962567591}
   billboard: {fileID: 8183648341966682772}
   currentHealth: 100
+  woodDestruct: {fileID: 0}
+  stoneDestruct: {fileID: 0}
+  MaxHealthUpgradeCost: Wood:5
+  AttackDmgUpgradeCost: Wood:5
+  FireRateUpgradeCost: Wood:10
+  MaxHealthLevel: 0
+  AttackDmgLevel: 0
+  FireRateLevel: 0
 --- !u!208 &8722305273406268407
 NavMeshObstacle:
   m_ObjectHideFlags: 0

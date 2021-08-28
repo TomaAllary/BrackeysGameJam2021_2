@@ -22,6 +22,7 @@ public class FireballTurret : Turret
                 ammo.transform.position = projectileStartPos.position;
                 ammo.target = target.transform;
                 ammo.transform.LookAt(target.transform);
+                ammo.attackDamage = attackDmg;
 
                 //reset cooldown
                 cooldown = attackRate;

@@ -55,6 +55,8 @@ public class PlayerMovement : MonoBehaviour
         //toggle craft menu on E
         if (Input.GetKeyDown(KeyCode.E)) {
             craftingPanel.SetActive(!craftingPanel.activeSelf);
+            if (craftingPanel.activeSelf == false)
+                MarketManager.Instance.ClearObjectToPlace();
         }
 
         else if (Input.GetKey(KeyCode.Mouse0) && canAttack) {
@@ -144,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     public void UpgradeMaxHealth(UpgradeBar action) {
-        if (action.Upgrade("1")) {
+        if (action.Upgrade("Horn:1")) {
             float healthRatio = (float)healthBar.getMaxHealth() / (float)healthBar.getHealth();
             healthBar.setMaxHealth((int)(healthBar.getMaxHealth() * 1.1f));
             healthBar.setHealth((int)(healthBar.getMaxHealth() * healthRatio));
@@ -152,32 +154,32 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void UpgradeMovementSpeed(UpgradeBar action) {
-        if (action.Upgrade("1")) {
+        if (action.Upgrade("Horn:1")) {
             speed += 2.5f;
         }
     }
 
     public void UpgradeAttackDmg(UpgradeBar action) {
-        if (action.Upgrade("1")) {
+        if (action.Upgrade("Horn:1")) {
             Staff.GetComponent<Staff>().attackDamage += (int)(1.5 * Staff.GetComponent<Staff>().attackDamage);
         }
     }
 
     public void UpgradeFireballRate(UpgradeBar action) {
-        if (action.Upgrade("1")) {
+        if (action.Upgrade("Horn:1")) {
             fireballCoolDown *= 0.7f;
         }
     }
 
     public void UpgradeFireballExplosion(UpgradeBar action) {
-        if (action.Upgrade("1")) {
+        if (action.Upgrade("Horn:1")) {
             Constants.FIREBALL_EXPLOSION_MAX_SIZE = Constants.FIREBALL_EXPLOSION_MAX_SIZE * 1.1f;
             Constants.FIREBALL_EXPLOSION_BASIC_PUSH = Constants.FIREBALL_EXPLOSION_BASIC_PUSH * 1.04f;
         }
     }
 
     public void UpgradeFireballDmg(UpgradeBar action) {
-        if (action.Upgrade("1")) {
+        if (action.Upgrade("Horn:1")) {
             Constants.FIREBALL_BASIC_ATTACK = (int)(Constants.FIREBALL_BASIC_ATTACK * 1.1f);
         }
     }

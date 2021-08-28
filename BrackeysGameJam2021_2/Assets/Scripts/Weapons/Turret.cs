@@ -7,6 +7,7 @@ public class Turret : MonoBehaviour
     public Projectile projectile;
     public Transform projectileStartPos;
     public float attackRate;
+    public int attackDmg;
     public float range;
 
     protected float cooldown;
@@ -17,6 +18,7 @@ public class Turret : MonoBehaviour
     {
         range = Constants.ARROW_TURRET_BASIC_RANGE;
         attackRate = Constants.ARROW_TURRET_BASIC_SPEED;
+        attackDmg = Constants.CANT_MISS_ARROW_ATTACK;
         cooldown = 0f;
     }
 
@@ -29,6 +31,7 @@ public class Turret : MonoBehaviour
                 Projectile ammo = Instantiate(projectile);
                 ammo.transform.position = projectileStartPos.position;
                 ammo.target = target.transform;
+                ammo.attackDamage = attackDmg;
 
                 //reset cooldown
                 cooldown = attackRate;

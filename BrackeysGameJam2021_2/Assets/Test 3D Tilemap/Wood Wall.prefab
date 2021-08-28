@@ -51,8 +51,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   label: {fileID: 0}
-  itemPreview: {fileID: 0}
-  itemModel: {fileID: 6996771836745084117, guid: b0e2b511887e9df4997b1797359ffaa1, type: 3}
+  itemPreview: {fileID: 5971231874105099807, guid: f20ffe50b752e5746aff33aa7ead2802, type: 3}
+  itemModel: {fileID: 3425629380125203894}
   ressourceType: wood
   cost: 1
   marketName: Wall
@@ -113,10 +113,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba78cedceb9bc84c95d6fa69979ecbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canAttack: 0
   healthBar: {fileID: 6608626451974258401}
   billboard: {fileID: 6608626450835071442}
   currentHealth: 50
   woodDestruct: {fileID: 8300000, guid: d51aab1fd5f405b40b93c4cf9e371b3e, type: 3}
+  stoneDestruct: {fileID: 0}
+  MaxHealthUpgradeCost: Wood:1
+  AttackDmgUpgradeCost: Wood:0
+  FireRateUpgradeCost: Wood:0
 --- !u!82 &1532049081134983574
 AudioSource:
   m_ObjectHideFlags: 0

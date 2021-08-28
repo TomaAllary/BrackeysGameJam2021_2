@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 using UnityEngine.AI;
+using UnityEngine.UI;
+
 public class MarketManager : MonoBehaviour
 {
     //CONSTRUCTION STUFF
@@ -15,7 +17,13 @@ public class MarketManager : MonoBehaviour
     public Camera healthBarsCam;
     public GameObject upgradePanel;
 
+    public TMP_Text itemSelectedLabel;
+    public GameObject healthUpgradeBar;
+    public GameObject dmgUpgradeBar;
+    public GameObject fireRateUpgradeBar;
+
     private BuyableItem actualItemToPlace;
+    private Constructable selectedItem;
 
     [SerializeField] public NavMeshSurface[] navMeshSurfaces;
     [SerializeField] private Tilemap tileMap;
@@ -159,6 +167,60 @@ public class MarketManager : MonoBehaviour
 
     public void ToggleUpgradePanel() {
         upgradePanel.SetActive(!upgradePanel.activeSelf);
+        RefreshItemUpgradePanel();
+    }
+
+    public void RefreshItemUpgradePanel() {
+        if (selectedItem == null) {
+            itemSelectedLabel.text = "No item selected";
+            healthUpgradeBar.SetActive(false);
+            dmgUpgradeBar.SetActive(false);
+            fireRateUpgradeBar.SetActive(false);
+        }
+        else {
+            TMP_Text costLabel = (healthUpgradeBar.GetComponentInChildren<Button>()).GetComponentInChildren<TMP_Text>();
+            costLabel.text = selectedItem.MaxHealthUpgradeCost;
+
+            costLabel = (dmgUpgradeBar.GetComponentInChildren<Button>()).GetComponentInChildren<TMP_Text>();
+            costLabel.text = selectedItem.AttackDmgUpgradeCost;
+
+            costLabel = (fireRateUpgradeBar.GetComponentInChildren<Button>()).GetComponentInChildren<TMP_Text>();
+            costLabel.text = selectedItem.FireRateUpgradeCost;
+
+            healthUpgradeBar.GetComponent<UpgradeBar>().SetLevel(selectedItem.MaxHealthLevel);
+            dmgUpgradeBar.GetComponent<UpgradeBar>().SetLevel(selectedItem.AttackDmgLevel);
+            fireRateUpgradeBar.GetComponent<UpgradeBar>().SetLevel(selectedItem.FireRateLevel);
+
+
+            itemSelectedLabel.text = ("Item Upgrade: " + selectedItem.gameObject.name).Replace("(Clone)", "");
+
+            healthUpgradeBar.SetActive(true);
+            dmgUpgradeBar.SetActive(true);
+            fireRateUpgradeBar.SetActive(true);
+
+            if (!selectedItem.canAttack) {
+                dmgUpgradeBar.SetActive(false);
+                fireRateUpgradeBar.SetActive(false);
+            }
+        }
+    }
+
+    public void UpgradeItemMaxHealth() {
+        if (selectedItem != null) {
+            selectedItem.UpgradeMaxHealth(healthUpgradeBar.GetComponent<UpgradeBar>());
+        }
+    }
+
+    public void UpgradeAttackDmg() {
+        if (selectedItem != null) {
+            selectedItem.UpgradeAttackDmg(dmgUpgradeBar.GetComponent<UpgradeBar>());
+        }
+    }
+
+    public void UpgradeFireRate() {
+        if (selectedItem != null) {
+            selectedItem.UpgradeFireRate(fireRateUpgradeBar.GetComponent<UpgradeBar>());
+        }
     }
 
 
@@ -232,21 +294,30 @@ public class MarketManager : MonoBehaviour
                 }
             }
             else {
+                if (Input.GetMouseButtonDown(0)) {
+                    if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Construction"))) {
 
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Construction"))) {
+                        BuyableItem itemSelected = hit.collider.gameObject.GetComponent<BuyableItem>();
+                        Constructable constructionSelected = hit.collider.gameObject.GetComponent<Constructable>();
 
-                    BuyableItem itemSelected = hit.collider.gameObject.GetComponent<BuyableItem>();
-                    if (itemSelected != null && itemSelected.itemPreview != null) {
-                        if(objSelectedPreview == null)
-                            objSelectedPreview = Instantiate(itemSelected.itemPreview);
+                        if (itemSelected != null && itemSelected.itemPreview != null && constructionSelected != null) {
+                            if (objSelectedPreview == null)
+                                objSelectedPreview = Instantiate(itemSelected.itemPreview);
 
-                        objSelectedPreview.SetActive(true);
-                        objSelectedPreview.transform.position = itemSelected.gameObject.transform.position;
+                            objSelectedPreview.SetActive(true);
+                            objSelectedPreview.transform.position = itemSelected.gameObject.transform.position;
+
+                            selectedItem = constructionSelected;
+                        }
+
                     }
-                }
-                else {
-                    if(objSelectedPreview != null)
-                        objSelectedPreview.SetActive(false);
+                    else {
+                        selectedItem = null;
+
+                        if (objSelectedPreview != null)
+                            objSelectedPreview.SetActive(false);
+                    }
+                    RefreshItemUpgradePanel();
                 }
             }
 

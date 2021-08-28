@@ -98,9 +98,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba78cedceb9bc84c95d6fa69979ecbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canAttack: 1
   healthBar: {fileID: 2520720993978824261}
   billboard: {fileID: 2520720992696838518}
   currentHealth: 100
+  woodDestruct: {fileID: 0}
+  stoneDestruct: {fileID: 0}
+  MaxHealthUpgradeCost: Wood:5
+  AttackDmgUpgradeCost: Wood:5
+  FireRateUpgradeCost: Wood:10
 --- !u!208 &3054167063184961557
 NavMeshObstacle:
   m_ObjectHideFlags: 0
