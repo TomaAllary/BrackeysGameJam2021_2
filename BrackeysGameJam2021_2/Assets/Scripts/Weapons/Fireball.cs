@@ -32,8 +32,4 @@ public class Fireball : Projectile
         Destroy(this.gameObject);
         
     }
-
-    public void setExplosionSize(float scale) {
-        fireballExplosion.GetComponent<FireballExplosion>().setExplosionSize(scale);
-    }
 }

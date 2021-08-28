@@ -13,7 +13,6 @@ public class FireballExplosion : Weapon
         isAttacking = true;
         attackDamage = Constants.FIREBALL_BASIC_ATTACK;
         push = Constants.FIREBALL_EXPLOSION_BASIC_PUSH;
-        //setExplosionSize(Constants.FIREBALL_EXPLOSION_MAX_SIZE);
         gameObject.GetComponent<Transform>().localScale = gameObject.GetComponent<Transform>().localScale * Constants.FIREBALL_EXPLOSION_MAX_SIZE;
 
     }
@@ -26,10 +25,5 @@ public class FireballExplosion : Weapon
             Destroy(this.gameObject);
         else
             existancetick--;
-    }
-
-    public void setExplosionSize(float scale) {
-        //gameObject.GetComponent<Transform>().localScale = gameObject.GetComponent<Transform>().localScale * scale;
-       // push *= scale;
     }
 }

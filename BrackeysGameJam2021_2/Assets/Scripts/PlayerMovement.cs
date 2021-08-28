@@ -28,9 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private float steptick;
 
     private float fireballTimer;
-    private float fireballExplosionSize;
 
-    private float fireballDmg;
 
     private Rigidbody rb;
     // Start is called before the first frame update
@@ -42,8 +40,6 @@ public class PlayerMovement : MonoBehaviour
         attackCoolDown = 0f;
         fireballCoolDown = Constants.FIREBALL_COOLDOWN;
         fireballTimer = fireballCoolDown;
-        fireballExplosionSize = Constants.FIREBALL_EXPLOSION_MAX_SIZE;
-        fireballDmg = Constants.FIREBALL_BASIC_ATTACK;
 
         playerHealth = Constants.NORMAL_PLAYER_HEALTH;
         maxHealth = playerHealth;
@@ -69,8 +65,6 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Space) && fireballTimer < 0)
         {
             Fireball ball = Instantiate(fireball, (transform.position + (transform.forward * 5)), transform.rotation).GetComponent<Fireball>();
-            //ball.setExplosionSize(fireballExplosionSize);
-            ball.attackDamage = (int)fireballDmg;
 
             fireballTimer = fireballCoolDown;
         }
@@ -175,13 +169,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void UpgradeFireballExplosion(UpgradeBar action) {
         if (action.Upgrade("1")) {
-            fireballExplosionSize *= 1.1f;
+            Constants.FIREBALL_EXPLOSION_MAX_SIZE = Constants.FIREBALL_EXPLOSION_MAX_SIZE * 1.1f;
+            Constants.FIREBALL_EXPLOSION_BASIC_PUSH = Constants.FIREBALL_EXPLOSION_BASIC_PUSH * 1.04f;
         }
     }
 
     public void UpgradeFireballDmg(UpgradeBar action) {
         if (action.Upgrade("1")) {
-            fireballDmg *= 1.1f;
+            Constants.FIREBALL_BASIC_ATTACK = (int)(Constants.FIREBALL_BASIC_ATTACK * 1.1f);
         }
     }
 }

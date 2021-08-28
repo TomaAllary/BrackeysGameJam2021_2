@@ -16,7 +16,7 @@ public static class Constants
     public const int STAFF_BASIC_ATTACK = 7;
     public const float STAFF_BASIC_PUSH = .3f;
 
-    public const int FIREBALL_BASIC_ATTACK = 15;
+    public static int FIREBALL_BASIC_ATTACK = 15;
     public const float FIREBALL_BASIC_PUSH = 0;
     public const float FIREBALL_BASIC_SPEED = 10;
 
@@ -26,8 +26,8 @@ public static class Constants
     public const float CANONBALL_BASIC_SPEED = 10;
 
     public const int FIREBALL_EXPLOSION_BASIC_ATTACK = 8;
-    public const float FIREBALL_EXPLOSION_BASIC_PUSH = 2.8f;
-    public const float FIREBALL_EXPLOSION_MAX_SIZE = 1f;
+    public static float FIREBALL_EXPLOSION_BASIC_PUSH = 2.8f;
+    public static float FIREBALL_EXPLOSION_MAX_SIZE = 1f;
 
     public const int CANONBALL_EXPLOSION_BASIC_ATTACK = 8;
     public const float CANONBALL_EXPLOSION_BASIC_PUSH = 2.8f;
