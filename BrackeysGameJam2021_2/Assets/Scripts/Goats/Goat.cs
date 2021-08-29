@@ -22,11 +22,12 @@ public class Goat : Weapon
     private Color color;
     public AudioClip[] goatCries;
     public AudioClip hit;
-
+    [SerializeField] private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
+        animator = gameObject.GetComponentInChildren<Animator>();
         attackDamage = 5;
         isAttacking = true;
         attackRemainingCD = attackCooldown = 1;
@@ -35,6 +36,9 @@ public class Goat : Weapon
         stunTick = 0;
         isDying = false;
         color = this.GetComponent<MeshRenderer>().material.color;
+
+        animator.SetBool("isWalking", true);
+        
     }
     private void Awake()
     {
@@ -48,7 +52,10 @@ public class Goat : Weapon
     // Update is called once per frame
     void Update()
     {
-
+        //if (animator.gameObject.activeSelf)
+        //{
+        //    animator.Play("isWalking");
+        //}
         //GameObject turret = GameObject.Find("Turret(Clone)");
         //if(turret != null)
         //    agent.destination = turret.transform.position;
@@ -57,7 +64,7 @@ public class Goat : Weapon
         //    agent.destination = goal.position;
         //}
 
-        if(gameObject.transform.position.y < -10)
+        if (gameObject.transform.position.y < -10)
         {
             Destroy(gameObject);
         }
@@ -79,8 +86,11 @@ public class Goat : Weapon
             try
             {
                 if (agent.enabled == false && isDying == false)
-                    agent.enabled = true;              
-                agent.destination = goal.position;
+                {
+                    animator.SetBool("isWalking", true);
+                    agent.enabled = true;
+                    agent.destination = goal.position;
+                }
             }
             //Means the goat is oob
             catch
@@ -174,19 +184,21 @@ public class Goat : Weapon
             healthBar.GetComponent<HealthBar>().setHealth(currentHealth);
             if (currentHealth <= 0)
             {
-                Quaternion rot = gameObject.transform.rotation;
-                rot.z = -90;
-                gameObject.transform.rotation = rot;
-                gameObject.GetComponent<Rigidbody>().freezeRotation = true;
+                //Quaternion rot = gameObject.transform.rotation;
+                //rot.z = -90;
+                //gameObject.transform.rotation = rot;
+                //gameObject.GetComponent<Rigidbody>().freezeRotation = true;
                 // Doesn't work for some reason
                 //color.a = 0.5f;
                 //gameObject.GetComponent<MeshRenderer>().material.color = color;
+                isDying = true;
+                animator.SetBool("isDead", true);
                 gameObject.GetComponent<NavMeshAgent>().enabled = false;
                 deathCounter = 5f;
-                isDying = true;
             }
             agent.enabled = false;
             gameObject.GetComponent<Rigidbody>().useGravity = false;
+            animator.SetBool("isWalking", false);
             stunTick = collision.gameObject.GetComponent<Weapon>().push *2;
             gravTick = collision.gameObject.GetComponent<Weapon>().push/3;
             Vector3 dir = Vector3.up * collision.gameObject.GetComponent<Weapon>().push;

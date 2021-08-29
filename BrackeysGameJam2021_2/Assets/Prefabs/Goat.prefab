@@ -108,7 +108,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.0000002
-  m_BaseOffset: 1.15
+  m_BaseOffset: 1.3
   m_WalkableMask: 7
   m_ObstacleAvoidanceType: 2
 --- !u!65 &6848499665090049376
@@ -157,6 +157,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e22cd61f267293f4a926b212006c5b27, type: 3}
   - {fileID: 8300000, guid: 08bacc2a92c113b448c8e7d9a5dab66f, type: 3}
   hit: {fileID: 8300000, guid: 005a7e14f2650e740b2a7aecd4f4a701, type: 3}
+  animator: {fileID: 0}
 --- !u!54 &6848499665090049404
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -441,6 +442,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7459423640374326537, guid: 611340e7c0633ba40ac3bad248137cd2, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 602aa66ab9754954881d340b86861b16, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 611340e7c0633ba40ac3bad248137cd2, type: 3}
 --- !u!4 &7498523845459132707 stripped

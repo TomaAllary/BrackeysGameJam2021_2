@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool basicAttacking;
     private float basicAttackAngle;
-
+ 
 
     private Rigidbody rb;
     // Start is called before the first frame update
@@ -145,6 +146,7 @@ public class PlayerMovement : MonoBehaviour
             if (playerHealth <= 0)
             {
                 Destroy(gameObject);
+                SceneManager.LoadScene("Outro");
             }
         }
     }
