@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11835,6 +11835,10 @@ PrefabInstance:
       propertyPath: craftingPanel
       value: 
       objectReference: {fileID: 890926898}
+    - target: {fileID: 3121507721558113844, guid: 1b6c45716987a5f4cb55c0721a53dd48, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b6c45716987a5f4cb55c0721a53dd48, type: 3}
 --- !u!114 &1305813136 stripped
@@ -21633,6 +21637,10 @@ PrefabInstance:
       propertyPath: projectileStartPos
       value: 
       objectReference: {fileID: 3883304696160781639}
+    - target: {fileID: 8617903972520634809, guid: 0764c7347eb41344f974087d6fcdde09, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0764c7347eb41344f974087d6fcdde09, type: 3}
 --- !u!114 &7649839544550431560
