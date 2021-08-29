@@ -179,8 +179,8 @@ public class Goat : Weapon
                 gameObject.transform.rotation = rot;
                 gameObject.GetComponent<Rigidbody>().freezeRotation = true;
                 // Doesn't work for some reason
-                color.a = 0.5f;
-                gameObject.GetComponent<MeshRenderer>().material.color = color;
+                //color.a = 0.5f;
+                //gameObject.GetComponent<MeshRenderer>().material.color = color;
                 gameObject.GetComponent<NavMeshAgent>().enabled = false;
                 deathCounter = 5f;
                 isDying = true;
