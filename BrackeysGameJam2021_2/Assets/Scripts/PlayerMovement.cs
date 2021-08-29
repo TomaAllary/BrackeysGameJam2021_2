@@ -9,6 +9,7 @@ using TMPro;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private GameObject craftingPanel;
+    [SerializeField] private GameObject forkTurnPoint;
     public float speed = 8.00f;
     public Camera mainCamera;
     public int maxHealth;
@@ -30,11 +31,16 @@ public class PlayerMovement : MonoBehaviour
 
     private float fireballTimer;
 
+    private bool basicAttacking;
+    private float basicAttackAngle;
+
 
     private Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
+        basicAttacking = false;
+
         player = GameObject.Find("Player");
         rb = GetComponent<Rigidbody>();
         canAttack = true;
@@ -63,7 +69,9 @@ public class PlayerMovement : MonoBehaviour
             attackCoolDown = 0.5f;
             canAttack = false;
             gameObject.GetComponent<AudioSource>().PlayOneShot(stick);
-            Staff.GetComponent<Staff>().isAttacking = true;          
+            Staff.GetComponent<Staff>().isAttacking = true;
+            basicAttacking = true;
+            basicAttackAngle = 0f;
         }
 
         else if (Input.GetKeyDown(KeyCode.Space) && fireballTimer < 0)
@@ -83,6 +91,16 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        if (basicAttacking) {
+            basicAttackAngle += 360 * 4 * Time.deltaTime;
+            transform.Rotate(new Vector3(0, 360 * 4 * Time.deltaTime, 0));
+
+            if(basicAttackAngle >= 360) {
+                basicAttacking = false;
+                Staff.GetComponent<Staff>().isAttacking = false;
+            }
+        }
+
         fireballTimer -= Time.deltaTime;
     }
 
@@ -95,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if (horizontalInput != 0 || verticalInput != 0)
+        if ((horizontalInput != 0 || verticalInput != 0) && !basicAttacking)
         {
             direction = horizontalInput * cameraRight + verticalInput * cameraForward;
             transform.LookAt(transform.position + direction);
@@ -161,7 +179,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void UpgradeAttackDmg(UpgradeBar action) {
         if (action.Upgrade("Horn:1")) {
-            Staff.GetComponent<Staff>().attackDamage += (int)(1.5 * Staff.GetComponent<Staff>().attackDamage);
+            Staff.GetComponent<Staff>().attackDamage = (int)(1.5 * Staff.GetComponent<Staff>().attackDamage);
         }
     }
 
