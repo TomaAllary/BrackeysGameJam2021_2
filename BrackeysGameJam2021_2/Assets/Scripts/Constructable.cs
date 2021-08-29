@@ -84,6 +84,7 @@ public class Constructable : Upgradable
                     GameObject.Find("ExplosionManager").GetComponent<AudioSource>().PlayOneShot(stoneDestruct);
                 }
                 MarketManager.Instance.DestroyTileObject(this.gameObject);
+                DataFile.nbDestroyed++;
             }
         }
     }

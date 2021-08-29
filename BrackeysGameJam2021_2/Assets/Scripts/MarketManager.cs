@@ -379,6 +379,7 @@ public class MarketManager : MonoBehaviour
         Vector3 realPos = tileMap.CellToWorld(pos);
 
         if (Buy(actualItemToPlace)) {
+            DataFile.nbBuild++;
             Constructable constructable = Instantiate(objToPlace, realPos, Quaternion.identity).gameObject.GetComponent<Constructable>();
             availablePlaces.Add(pos);
             //constructable.billboard.cam = healthBarsCam.transform;
