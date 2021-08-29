@@ -15,6 +15,12 @@ public class WaveMaker : MonoBehaviour
     public AudioClip waveTheme;
     public AudioSource mainSource;
 
+    public GameObject wood;
+    public GameObject rock;
+    public Vector3 maxMapPoint;
+    public Vector3 maxSpawnPoint;
+    public Vector3 minSpawnPoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +49,16 @@ public class WaveMaker : MonoBehaviour
         }
         else
             timesUp();
+
+        if(Random.Range(0,30) == 1) {
+            var obj = Instantiate(wood);
+            obj.transform.position = new Vector3(Random.Range(minSpawnPoint.x, maxSpawnPoint.x), 1, Random.Range(minSpawnPoint.z, maxSpawnPoint.z));
+        }
+
+        if(Random.Range(0,60) == 1) {
+            var obj = Instantiate(rock);
+            obj.transform.position = new Vector3(Random.Range(minSpawnPoint.x, maxSpawnPoint.x), 1, Random.Range(minSpawnPoint.z, maxSpawnPoint.z));
+        }
     }
 
     public void timesUp()
