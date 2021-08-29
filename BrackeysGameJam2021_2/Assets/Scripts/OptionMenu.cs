@@ -39,12 +39,7 @@ public class OptionMenu : MonoBehaviour
     }
 
     public void Quit() {
-        //return to main menu
-    }
-
-    public void Restart() {
-        //SceneManager.LoadScene(SceneManager.GetSceneAt(0).name);
-        //not working, it may be because of the market singleton
+        SceneManager.LoadScene("Intro");
     }
 
     public void ToggleOptionPanel() {

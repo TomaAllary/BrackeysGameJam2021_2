@@ -9,6 +9,8 @@ public class IntroMenu : MonoBehaviour
     public AudioSource storyAudio;
     bool storyOn;
     public AudioClip audioClipStory;
+
+    public GameObject tutoPanel;
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +53,14 @@ public class IntroMenu : MonoBehaviour
     public void playGame()
     {
         SceneManager.LoadScene("InGame");
+    }
+
+    public void openTuto() {
+        tutoPanel.SetActive(true);
+    }
+
+    public void closeTuto() {
+        tutoPanel.SetActive(false);
     }
 
 }
