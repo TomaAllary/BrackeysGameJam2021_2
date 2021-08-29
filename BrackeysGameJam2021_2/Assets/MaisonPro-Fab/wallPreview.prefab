@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1043641210493281153}
   m_Layer: 10
-  m_Name: wooPreview
+  m_Name: wallPreview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,7 +89,7 @@ PrefabInstance:
     - target: {fileID: 7177102917265196950, guid: b88c8e6f834d3bd4bbb3c2c97648ccc1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: cb4adf1f7cd6c44458f5459e6f5b669a, type: 2}
+      objectReference: {fileID: 2100000, guid: 781d7e76cde42e54791f1a283fc9777f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b88c8e6f834d3bd4bbb3c2c97648ccc1, type: 3}
 --- !u!4 &846137351020983223 stripped
