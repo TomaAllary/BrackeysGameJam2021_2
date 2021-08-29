@@ -39,7 +39,7 @@ public class OptionMenu : MonoBehaviour
     }
 
     public void Quit() {
-        SceneManager.LoadScene("Intro");
+        Application.Quit();
     }
 
     public void ToggleOptionPanel() {
