@@ -78,7 +78,7 @@ public class Goat : Weapon
         {
             try
             {
-                if (agent.enabled == false)
+                if (agent.enabled == false && isDying == false)
                     agent.enabled = true;              
                 agent.destination = goal.position;
             }
@@ -220,6 +220,7 @@ public class Goat : Weapon
         Vector3 pos = gameObject.transform.position;
         pos.y = 1;
         Quaternion rot = gameObject.transform.rotation;
+        DataFile.nbGoats++;
         Destroy(this.gameObject);
         spawnLoot(pos, rot);
         yield return null;

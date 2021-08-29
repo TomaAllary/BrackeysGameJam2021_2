@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class IntroMenu : MonoBehaviour
 {
@@ -42,4 +43,14 @@ public class IntroMenu : MonoBehaviour
         mainAudio.volume = 1.0f;
         storyOn = false;
     }
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    public void playGame()
+    {
+        SceneManager.LoadScene("InGame");
+    }
+
 }
