@@ -30,7 +30,7 @@ public class WaveMaker : MonoBehaviour
 
     private void Awake()
     {
-        timer = 20;
+        timer = 30;
         wave = 0;
         player = GameObject.Find("Player").GetComponent<PlayerMovement>();
         gameObject.GetComponent<Timer>().startTimer(timer);
@@ -50,12 +50,12 @@ public class WaveMaker : MonoBehaviour
         else
             timesUp();
 
-        if(Random.Range(0,30) == 1) {
+        if(Random.Range(0,50) == 1) {
             var obj = Instantiate(wood);
             obj.transform.position = new Vector3(Random.Range(minSpawnPoint.x, maxSpawnPoint.x), 1, Random.Range(minSpawnPoint.z, maxSpawnPoint.z));
         }
 
-        if(Random.Range(0,60) == 1) {
+        if(Random.Range(0,100) == 1) {
             var obj = Instantiate(rock);
             obj.transform.position = new Vector3(Random.Range(minSpawnPoint.x, maxSpawnPoint.x), 1, Random.Range(minSpawnPoint.z, maxSpawnPoint.z));
         }
@@ -66,13 +66,14 @@ public class WaveMaker : MonoBehaviour
         if (wave == 0) 
         {
             spawnWave(20, goat);
-            timer = 60;
-        }
-        else if (wave == 1)
-        {
-            spawnWave(30, goat);
             timer = 120;
         }
+        else
+        {
+            spawnWave(20 + wave*10, goat);
+            timer = 180;
+        }
+
         gameObject.GetComponent<Timer>().startTimer(timer);
         wave++;
     }

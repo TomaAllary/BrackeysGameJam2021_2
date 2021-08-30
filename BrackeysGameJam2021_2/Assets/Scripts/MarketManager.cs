@@ -42,10 +42,10 @@ public class MarketManager : MonoBehaviour
     public static MarketManager Instance { get { return instance; } }
     //TODO: put these to 0, 99 is for testing only
     private Dictionary<string, int> ressources = new Dictionary<string, int>() {
-        { "Wood", 99 },
-        { "Rock", 99 },
-        { "LapisLazulis", 99 },
-        { "Horn", 99 }
+        { "Wood", 29 },
+        { "Rock", 19 },
+        { "LapisLazulis", 0 },
+        { "Horn", 0 }
     };
 
 
@@ -56,6 +56,8 @@ public class MarketManager : MonoBehaviour
         else {
             instance = this;
         }
+        AddRessource("Wood");
+        AddRessource("Rock");
     }
 
     public bool Buy(BuyableItem buyableItem) {

@@ -27,9 +27,12 @@ public class Fireball : Projectile
 
     private void OnCollisionEnter(Collision other)
     {
-        Transform current = gameObject.transform;
-        Instantiate(fireballExplosion, current.position, current.rotation);
-        Destroy(this.gameObject);
+        if (other.gameObject.layer != 7)
+        {
+            Transform current = gameObject.transform;
+            Instantiate(fireballExplosion, current.position, current.rotation);
+            Destroy(this.gameObject);
+        }      
         
     }
 }

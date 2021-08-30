@@ -146,7 +146,7 @@ MonoBehaviour:
   canAttack: 0
   healthBar: {fileID: 7416344245782104618}
   billboard: {fileID: 7416344244504253721}
-  currentHealth: 50
+  currentHealth: 200
   woodDestruct: {fileID: 0}
   stoneDestruct: {fileID: 8300000, guid: fda2ecfe916d9ad4a97386e636f0d6f4, type: 3}
   MaxHealthUpgradeCost: Rock:1

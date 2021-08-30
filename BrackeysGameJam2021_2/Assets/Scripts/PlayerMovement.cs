@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private GameObject craftingPanel;
     [SerializeField] private GameObject forkTurnPoint;
-    public float speed = 8.00f;
+    public float speed = 10.00f;
     public Camera mainCamera;
     public int maxHealth;
     public int playerHealth;

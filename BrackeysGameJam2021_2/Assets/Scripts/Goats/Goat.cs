@@ -123,6 +123,7 @@ public class Goat : Weapon
             int selectCry = Random.Range(0, goatCries.Length);
             gameObject.GetComponent<AudioSource>().PlayOneShot(goatCries[selectCry]);
         }
+        agent.destination = goal.position;
 
     }
 
