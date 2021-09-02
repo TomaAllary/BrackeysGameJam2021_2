@@ -233,7 +233,7 @@ public class Goat : Weapon
         Vector3 pos = gameObject.transform.position;
         pos.y = 1;
         Quaternion rot = gameObject.transform.rotation;
-        DataFile.nbGoats++;
+        DataFile.stats["nbGoats"]++;
         Destroy(this.gameObject);
         spawnLoot(pos, rot);
         yield return null;

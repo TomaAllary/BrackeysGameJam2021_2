@@ -4,11 +4,13 @@ using UnityEngine;
 
 public static class DataFile
 {
-    public static int nbGoats = 0;
-    public static int nbWaves = 0;
-    public static int nbBranches = 0;
-    public static int nbRocks = 0;
-    public static int nbHorns = 0;
-    public static int nbBuild = 0;
-    public static int nbDestroyed = 0;
+    public static Dictionary<string, int> stats = new Dictionary<string, int>() {
+        {"nbGoats", 0 },
+        {"nbWaves", 0 },
+        {"Wood", 0 },
+        {"Rock", 0 },
+        {"Horn", 0 },
+        {"nbBuild", 0 },
+        {"nbDestroyed", 0 },
+    };
 }

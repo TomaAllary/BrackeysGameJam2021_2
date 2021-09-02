@@ -138,6 +138,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Destroy(other.gameObject);
             MarketManager.Instance.AddRessource(other.gameObject.tag);
+            DataFile.stats[other.gameObject.tag]++;
         }
         if(other.gameObject.layer == LayerMask.NameToLayer("Goat") && other.GetComponent<Weapon>() != null)
         {

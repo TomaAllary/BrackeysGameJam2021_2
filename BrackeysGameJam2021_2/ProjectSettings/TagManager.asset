@@ -10,6 +10,7 @@ TagManager:
   - Projectile
   - wood
   - stone
+  - Horn
   layers:
   - Default
   - TransparentFX

@@ -80,7 +80,7 @@ public class WaveMaker : MonoBehaviour
     public void spawnWave(int number, Goat goat)
     {
         player.playerHealth = player.maxHealth;
-        DataFile.nbWaves = wave;
+        DataFile.stats["nbWaves"] = wave;
         player.healthBar.setHealth(player.maxHealth);        
         //gameObject.GetComponentInChildren<AudioSource>().PlayOneShot(goatScream);
         mainSource.Stop();
