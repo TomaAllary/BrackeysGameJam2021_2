@@ -10,6 +10,13 @@ public class Constructable : Upgradable
     public AudioClip woodDestruct;
     public AudioClip stoneDestruct;
 
+    public GameObject itemPreview;
+    public GameObject itemModel;
+
+    public string ressourceType;
+    public int cost;
+    public string marketName;
+
     public string MaxHealthUpgradeCost;
     public string AttackDmgUpgradeCost;
     public string FireRateUpgradeCost;

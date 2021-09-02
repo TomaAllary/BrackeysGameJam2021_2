@@ -40,7 +40,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1355843759777458556}
-  - component: {fileID: 4758132804065367209}
   - component: {fileID: 9087645121174817551}
   - component: {fileID: 1321253488194598091}
   - component: {fileID: 5203431556917880093}
@@ -68,24 +67,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4758132804065367209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355843759777458557}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ce8ec01edf7895408d062ff87ddb5e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  label: {fileID: 0}
-  itemPreview: {fileID: 5971231874105099807, guid: e27e5975d1b449e4a83e455b53758974, type: 3}
-  itemModel: {fileID: 919132149155446097, guid: c7e5a3a4ef1dead43b0bd6178d602397, type: 3}
-  ressourceType: Stone
-  cost: 1
-  marketName: Wall
 --- !u!54 &9087645121174817551
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -147,8 +128,13 @@ MonoBehaviour:
   healthBar: {fileID: 7416344245782104618}
   billboard: {fileID: 7416344244504253721}
   currentHealth: 200
-  woodDestruct: {fileID: 0}
+  woodDestruct: {fileID: 8300000, guid: d51aab1fd5f405b40b93c4cf9e371b3e, type: 3}
   stoneDestruct: {fileID: 8300000, guid: fda2ecfe916d9ad4a97386e636f0d6f4, type: 3}
+  itemPreview: {fileID: 5971231874105099807, guid: e27e5975d1b449e4a83e455b53758974, type: 3}
+  itemModel: {fileID: 1355843759777458557}
+  ressourceType: Rock
+  cost: 1
+  marketName: Rock wall
   MaxHealthUpgradeCost: Rock:1
   AttackDmgUpgradeCost: Rock:0
   FireRateUpgradeCost: Rock:0

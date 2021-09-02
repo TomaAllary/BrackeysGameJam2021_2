@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4941578847380136999}
-  - component: {fileID: 1462728575200877042}
   - component: {fileID: 2907392856592582228}
   - component: {fileID: 4905236368400054672}
   - component: {fileID: 2193994219842938950}
@@ -38,24 +37,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1462728575200877042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4941578847380136998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ce8ec01edf7895408d062ff87ddb5e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  label: {fileID: 0}
-  itemPreview: {fileID: 6550100664853535473, guid: ce2dbf4298a083c4db8abe2bac63aa16, type: 3}
-  itemModel: {fileID: 0}
-  ressourceType: Wood
-  cost: 5
-  marketName: Wood Door
 --- !u!54 &2907392856592582228
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -119,6 +100,11 @@ MonoBehaviour:
   currentHealth: 100
   woodDestruct: {fileID: 0}
   stoneDestruct: {fileID: 0}
+  itemPreview: {fileID: 0}
+  itemModel: {fileID: 0}
+  ressourceType: 
+  cost: 0
+  marketName: 
   MaxHealthUpgradeCost: Wood:1
   AttackDmgUpgradeCost: 
   FireRateUpgradeCost: 

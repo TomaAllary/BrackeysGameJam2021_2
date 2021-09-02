@@ -90,7 +90,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 689032550002641170}
-  - component: {fileID: 7299827760480892826}
   - component: {fileID: 8617903972520634809}
   - component: {fileID: 1587979420481689382}
   - component: {fileID: 1952293953286471350}
@@ -120,24 +119,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7299827760480892826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 689032550002641171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ce8ec01edf7895408d062ff87ddb5e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  label: {fileID: 0}
-  itemPreview: {fileID: 7405305047615300057, guid: 1096c634bee22e14b961ea3a486136ee, type: 3}
-  itemModel: {fileID: 689032550002641171}
-  ressourceType: Wood
-  cost: 20
-  marketName: Turret
 --- !u!54 &8617903972520634809
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -183,11 +164,16 @@ MonoBehaviour:
   healthBar: {fileID: 2520720993978824261}
   billboard: {fileID: 2520720992696838518}
   currentHealth: 200
-  woodDestruct: {fileID: 0}
-  stoneDestruct: {fileID: 0}
-  MaxHealthUpgradeCost: Wood:5
-  AttackDmgUpgradeCost: Wood:5
-  FireRateUpgradeCost: Wood:10
+  woodDestruct: {fileID: 8300000, guid: d51aab1fd5f405b40b93c4cf9e371b3e, type: 3}
+  stoneDestruct: {fileID: 8300000, guid: fda2ecfe916d9ad4a97386e636f0d6f4, type: 3}
+  itemPreview: {fileID: 7405305047615300057, guid: 1096c634bee22e14b961ea3a486136ee, type: 3}
+  itemModel: {fileID: 689032550002641171}
+  ressourceType: Rock
+  cost: 20
+  marketName: Canon turret
+  MaxHealthUpgradeCost: Rock:5
+  AttackDmgUpgradeCost: Rock:5
+  FireRateUpgradeCost: Rock:10
   MaxHealthLevel: 0
   AttackDmgLevel: 0
   FireRateLevel: 0

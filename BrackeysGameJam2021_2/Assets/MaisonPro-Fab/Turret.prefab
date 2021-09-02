@@ -558,7 +558,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6550100664853535472}
-  - component: {fileID: -5321148087240203144}
   - component: {fileID: 2662116306114247259}
   - component: {fileID: 4999255566158316740}
   - component: {fileID: -7937057491465650888}
@@ -588,24 +587,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-5321148087240203144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6550100664853535473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ce8ec01edf7895408d062ff87ddb5e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  label: {fileID: 0}
-  itemPreview: {fileID: 946386494985888168, guid: 073e49efb4ffe6f4b95d8e8dff8a9d54, type: 3}
-  itemModel: {fileID: 6550100664853535473}
-  ressourceType: Wood
-  cost: 20
-  marketName: Turret
 --- !u!54 &2662116306114247259
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -668,8 +649,13 @@ MonoBehaviour:
   healthBar: {fileID: 8183648340962567591}
   billboard: {fileID: 8183648341966682772}
   currentHealth: 100
-  woodDestruct: {fileID: 0}
-  stoneDestruct: {fileID: 0}
+  woodDestruct: {fileID: 8300000, guid: d51aab1fd5f405b40b93c4cf9e371b3e, type: 3}
+  stoneDestruct: {fileID: 8300000, guid: fda2ecfe916d9ad4a97386e636f0d6f4, type: 3}
+  itemPreview: {fileID: 946386494985888168, guid: 073e49efb4ffe6f4b95d8e8dff8a9d54, type: 3}
+  itemModel: {fileID: 6550100664853535473}
+  ressourceType: Wood
+  cost: 20
+  marketName: Arrow turret
   MaxHealthUpgradeCost: Wood:5
   AttackDmgUpgradeCost: Wood:5
   FireRateUpgradeCost: Wood:10

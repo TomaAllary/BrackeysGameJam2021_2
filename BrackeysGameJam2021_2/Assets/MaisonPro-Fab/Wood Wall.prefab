@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3425629380125203895}
-  - component: {fileID: 9174645948201377890}
   - component: {fileID: 4847956107506352068}
   - component: {fileID: 3390263282104500224}
   - component: {fileID: 8461390810772132310}
@@ -38,24 +37,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9174645948201377890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3425629380125203894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ce8ec01edf7895408d062ff87ddb5e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  label: {fileID: 0}
-  itemPreview: {fileID: 5971231874105099807, guid: e27e5975d1b449e4a83e455b53758974, type: 3}
-  itemModel: {fileID: 3425629380125203894}
-  ressourceType: wood
-  cost: 1
-  marketName: Wall
 --- !u!54 &4847956107506352068
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -118,7 +99,12 @@ MonoBehaviour:
   billboard: {fileID: 6608626450835071442}
   currentHealth: 100
   woodDestruct: {fileID: 8300000, guid: d51aab1fd5f405b40b93c4cf9e371b3e, type: 3}
-  stoneDestruct: {fileID: 0}
+  stoneDestruct: {fileID: 8300000, guid: fda2ecfe916d9ad4a97386e636f0d6f4, type: 3}
+  itemPreview: {fileID: 5971231874105099807, guid: e27e5975d1b449e4a83e455b53758974, type: 3}
+  itemModel: {fileID: 3425629380125203894}
+  ressourceType: Wood
+  cost: 1
+  marketName: Wood wall
   MaxHealthUpgradeCost: Wood:1
   AttackDmgUpgradeCost: Wood:0
   FireRateUpgradeCost: Wood:0

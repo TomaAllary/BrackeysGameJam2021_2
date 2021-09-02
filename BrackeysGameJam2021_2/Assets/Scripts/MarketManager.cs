@@ -22,7 +22,7 @@ public class MarketManager : MonoBehaviour
     public GameObject dmgUpgradeBar;
     public GameObject fireRateUpgradeBar;
 
-    private BuyableItem actualItemToPlace;
+    private Constructable actualItemToPlace;
     public Constructable selectedItem;
 
     [SerializeField] public NavMeshSurface[] navMeshSurfaces;
@@ -30,8 +30,6 @@ public class MarketManager : MonoBehaviour
     [SerializeField] private List<Vector3> availablePlaces;
     [SerializeField] private GameObject BuyResPanel;
 
-    //MARKET STUFF
-    [SerializeField] private List<BuyableItem> marketItems;
 
     [Header("wood, rock, ll and horn counter")]
     [SerializeField] private TMP_Text[] ressourceCounters = new TMP_Text[4];
@@ -60,7 +58,7 @@ public class MarketManager : MonoBehaviour
         AddRessource("Rock");
     }
 
-    public bool Buy(BuyableItem buyableItem) {
+    public bool Buy(Constructable buyableItem) {
         if(ressources[buyableItem.ressourceType] >= buyableItem.cost) {
             ressources[buyableItem.ressourceType] -= buyableItem.cost;
 
@@ -303,17 +301,16 @@ public class MarketManager : MonoBehaviour
                 if (Input.GetMouseButtonDown(0)) {
                     if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Construction"))) {
 
-                        BuyableItem itemSelected = hit.collider.gameObject.GetComponent<BuyableItem>();
                         Constructable constructionSelected = hit.collider.gameObject.GetComponent<Constructable>();
 
                         Destroy(objSelectedPreview);
                         objSelectedPreview = null;
 
-                        if (itemSelected != null && itemSelected.itemPreview != null && constructionSelected != null) {
-                            objSelectedPreview = Instantiate(itemSelected.itemPreview);
+                        if (constructionSelected != null && constructionSelected.itemPreview != null) {
+                            objSelectedPreview = Instantiate(constructionSelected.itemPreview);
 
                             objSelectedPreview.SetActive(true);
-                            objSelectedPreview.transform.position = itemSelected.gameObject.transform.position;
+                            objSelectedPreview.transform.position = constructionSelected.gameObject.transform.position;
 
                             selectedItem = constructionSelected;
                         }
@@ -333,7 +330,7 @@ public class MarketManager : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Construction"))) {
 
-                    BuyableItem itemDestroyed = hit.collider.gameObject.GetComponent<BuyableItem>();
+                    Constructable itemDestroyed = hit.collider.gameObject.GetComponent<Constructable>();
                     if (itemDestroyed != null) {
                         //refund the cost
                         AddRessource(itemDestroyed.ressourceType + ":" + itemDestroyed.cost);
@@ -352,7 +349,7 @@ public class MarketManager : MonoBehaviour
         }
     }
 
-    public void SetObjectToPlace(BuyableItem buyableItem) {
+    public void SetObjectToPlace(Constructable buyableItem) {
         if (objToPlacePreview != null)
             Destroy(objToPlacePreview.gameObject);
 
