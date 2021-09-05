@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6462072403170326355}
   - component: {fileID: 9099826328127046553}
   - component: {fileID: 3745944127731407115}
+  - component: {fileID: 946695367852626223}
   m_Layer: 0
   m_Name: Menir
   m_TagString: Untagged
@@ -95,3 +96,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.0175548, y: 5.1563973, z: 2.8733268}
   m_Center: {x: 0.010866642, y: 2.5781982, z: 0.06060189}
+--- !u!208 &946695367852626223
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7298628163807814220}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.5090001, y: 2.578, z: 1.437}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.011000001, y: 2.578, z: 0.061000004}
+  m_TimeToStationary: 0.5
