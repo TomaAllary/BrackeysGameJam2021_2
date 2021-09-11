@@ -1289,6 +1289,7 @@ GameObject:
   - component: {fileID: 3121507721558113843}
   - component: {fileID: 3121507721558113842}
   - component: {fileID: 3121507721558113841}
+  - component: {fileID: 2248763006005042455}
   - component: {fileID: 1974618929}
   m_Layer: 11
   m_Name: Player
@@ -1411,6 +1412,28 @@ CharacterJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!195 &2248763006005042455
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3121507721558113840}
+  m_Enabled: 1
+  m_AgentTypeID: -334000983
+  m_Radius: 0.6
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 0
+  m_Height: 2.26
+  m_BaseOffset: 1.2
+  m_WalkableMask: 5
+  m_ObstacleAvoidanceType: 1
 --- !u!82 &1974618929
 AudioSource:
   m_ObjectHideFlags: 0

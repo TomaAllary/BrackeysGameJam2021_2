@@ -30,7 +30,7 @@ public class WaveMaker : MonoBehaviour
 
     private void Awake()
     {
-        timer = 30;
+        timer = 60;
         wave = 0;
         player = GameObject.Find("Player").GetComponent<PlayerMovement>();
         gameObject.GetComponent<Timer>().startTimer(timer);

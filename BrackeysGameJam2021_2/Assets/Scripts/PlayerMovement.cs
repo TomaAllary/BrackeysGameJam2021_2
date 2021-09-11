@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.AI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
  
 
     private Rigidbody rb;
+    private NavMeshAgent agent;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
 
         player = GameObject.Find("Player");
         rb = GetComponent<Rigidbody>();
+        agent = GetComponent<NavMeshAgent>();
         canAttack = true;
         attackCoolDown = 0f;
         fireballCoolDown = Constants.FIREBALL_COOLDOWN;
@@ -120,7 +123,8 @@ public class PlayerMovement : MonoBehaviour
             transform.LookAt(transform.position + direction);
             //transform.position = (transform.position + direction * Time.fixedDeltaTime * speed);
 
-            rb.MovePosition(transform.position + (direction * Time.fixedDeltaTime * speed));
+            //rb.MovePosition(transform.position + (direction * Time.fixedDeltaTime * speed));
+            agent.Move(direction * Time.fixedDeltaTime * speed);
             if (steptick <= 0)
             {
                 gameObject.GetComponentInChildren<AudioSource>().PlayOneShot(step);
