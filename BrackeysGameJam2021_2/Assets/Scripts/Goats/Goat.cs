@@ -44,7 +44,7 @@ public class Goat : Weapon
     {
         
         agent = this.gameObject.GetComponentInChildren<NavMeshAgent>();
-        goal = GameObject.Find("Player").transform;
+        goal = GameObject.Find("House").transform;
         agent.destination = goal.position;
 
     }

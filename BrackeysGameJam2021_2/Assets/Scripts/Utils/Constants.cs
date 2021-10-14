@@ -41,5 +41,5 @@ public static class Constants
 
     public static float CANONBALL_TURRET_BASIC_SPEED = 5f;
     public static int CANONBALL_TURRET_BASIC_RANGE = 20;
-
+    public static int HOUSE_MAX_HEALTH = 2000;
 }

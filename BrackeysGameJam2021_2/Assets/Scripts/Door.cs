@@ -1,14 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Door : MonoBehaviour
 {
-    private float openDoorTick;
+    private Transform player;
+
+    private float distanceToOpen = 3.0f;
+    private GameObject renderObj;
+    private BoxCollider doorCollider;
+    private NavMeshObstacle navMeshCollider;
     // Start is called before the first frame update
     void Start()
     {
-        openDoorTick = 0;   
+        renderObj = gameObject.transform.GetChild(0).gameObject;
+        doorCollider = GetComponent<BoxCollider>();
+        navMeshCollider = GetComponent<NavMeshObstacle>();
+        player = GameObject.Find("Player").transform;
     }
 
     // Update is called once per frame
@@ -18,22 +27,16 @@ public class Door : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (openDoorTick > 0)
-        {
-            openDoorTick -= Time.deltaTime;
+        if(Mathf.Abs((transform.position - player.position).magnitude) <= distanceToOpen) {
+            renderObj.SetActive(false);
+            doorCollider.enabled = false;
+            navMeshCollider.enabled = false;
         }
-        else
-        {
-            gameObject.GetComponent<BoxCollider>().enabled = true;
+        else {
+            renderObj.SetActive(true);
+            doorCollider.enabled = true;
+            navMeshCollider.enabled = true;
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.name == "Player")
-        {
-            gameObject.GetComponent<BoxCollider>().enabled = false;
-            openDoorTick = 1;
-        }
-    }
 }
