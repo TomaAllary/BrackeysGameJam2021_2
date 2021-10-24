@@ -17,7 +17,7 @@ public class ThirdPersonCamera : MonoBehaviour
     private Vector3 offset;
 
     void Start() {
-        offset = new Vector3(playerTarget.position.x, playerTarget.position.y + 9.5f, playerTarget.position.z + 7.0f);
+        offset = new Vector3(playerTarget.position.x, playerTarget.position.y + 8.0f, playerTarget.position.z + 7.0f);
     }
 
     void Update() {

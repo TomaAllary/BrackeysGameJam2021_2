@@ -39,13 +39,9 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody rb;
     private NavMeshAgent agent;
-
-    private Vector3 spawnPos;
     // Start is called before the first frame update
     void Start()
     {
-        spawnPos = transform.position;
-
         basicAttacking = false;
 
         player = GameObject.Find("Player");
@@ -58,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
 
         playerHealth = Constants.NORMAL_PLAYER_HEALTH;
         maxHealth = playerHealth;
+        //healthBar = gameObject.GetComponentInChildren<HealthBar>();
+        GameObject.Find("PlayerHealthbar");
         healthBar.setMaxHealth(playerHealth);
         steptick = 0;
     }
@@ -152,10 +150,8 @@ public class PlayerMovement : MonoBehaviour
             healthBar.setHealth(playerHealth);
             if (playerHealth <= 0)
             {
-                transform.position = spawnPos;
-                playerHealth = maxHealth;
-                healthBar.setHealth(playerHealth);
-
+                Destroy(gameObject);
+                SceneManager.LoadScene("Outro");
             }
         }
     }

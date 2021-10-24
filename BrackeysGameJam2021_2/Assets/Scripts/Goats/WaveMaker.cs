@@ -9,7 +9,6 @@ public class WaveMaker : MonoBehaviour
     public float timer;
     public int wave;
     public PlayerMovement player;
-    public House house;
     public AudioClip goatScream;
     public AudioClip countDown;
     public AudioClip mainTheme;
@@ -31,10 +30,9 @@ public class WaveMaker : MonoBehaviour
 
     private void Awake()
     {
-        timer = 10;
+        timer = 60;
         wave = 0;
         player = GameObject.Find("Player").GetComponent<PlayerMovement>();
-        house = GameObject.Find("House").GetComponent<House>();
         gameObject.GetComponent<Timer>().startTimer(timer);
         mainSource = GameObject.Find("Ambiance").GetComponentInChildren<AudioSource>();
         mainSource.PlayOneShot(mainTheme);
@@ -82,7 +80,6 @@ public class WaveMaker : MonoBehaviour
     public void spawnWave(int number, Goat goat)
     {
         player.playerHealth = player.maxHealth;
-        house.ResetHealth();
         DataFile.stats["nbWaves"] = wave;
         player.healthBar.setHealth(player.maxHealth);        
         //gameObject.GetComponentInChildren<AudioSource>().PlayOneShot(goatScream);
